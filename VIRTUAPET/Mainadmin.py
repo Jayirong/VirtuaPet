@@ -227,8 +227,8 @@ def actualizar():
 
 
 def nextPage():
-    ventana.destroy()
-    import Menu
+   
+    import Menuadmin
 
 Button(
  ventana,

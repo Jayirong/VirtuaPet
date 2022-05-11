@@ -23,11 +23,17 @@ marco['bg'] = '#f1d7ff'
 def ClicktoLogin():
     
     mydb = mysqlconnector.connect(host="localhost", user="root", password="", database="virtuapet2")
-    mycursor = mydb.cursor(dictionary=True)
+    mycursor = mydb.cursor()
     mycursor.execute("SELECT * FROM personas where User = '"+ UserTxt.get() +"' and Clave = '"+ PassTxt.get() +"';")
     myresult = mycursor.fetchone()
     if myresult==None:
        mymessagebox.showerror("Error", "Usuario o contraseña incorrectos")
+
+       
+    elif myresult[3]=='Administrador':
+        import Menuadmin
+        
+        
 
     else:
        
