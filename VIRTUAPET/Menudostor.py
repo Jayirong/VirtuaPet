@@ -25,7 +25,10 @@ def nextPage2():
    ventana.destroy()
    import Excel
 
-
+    
+def nextPage3():
+   ventana.destroy()
+   import Fichas
 
 def destruir():
     ventana.destroy()
@@ -47,7 +50,7 @@ Button(
 
  text="CREAR FICHAS"
  , 
-  
+    command=nextPage3,
     font=f,
    
     ).pack(fill=X, expand=TRUE, side=TOP,padx=5,pady=5

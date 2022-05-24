@@ -3,7 +3,6 @@ from tkinter import *
 
 from mysqlx import Column
 
-#comentario
 
 ventana= Tk()
 ventana.geometry("400x500")

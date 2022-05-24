@@ -26,15 +26,17 @@ db=DataBase()
 dia=IntVar()
 mes=StringVar()
 
-lbldia=Label(marco, text="SELECCIONAR DIA").grid(column=1,row=0,padx=5,pady=5)
-txtdia=ttk.Combobox(marco,values=["01","02","03","04","05","06","07","08","09","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31"], textvariable=dia)
+lbldia=Label(marco, text="SELECCIONAR DIAR").grid(column=1,row=0,padx=5,pady=5)
+txtdia=ttk.Combobox(marco,values=["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31"], textvariable=dia)
 txtdia.grid(column=2,row=0)
 txtdia.current(0)
 
-lbldia=Label(marco, text="MES").grid(column=3,row=0,padx=5,pady=5)
-txtdia=ttk.Combobox(marco,values=["ENERO","FEBRERO","MARZO","ABRIL","MAYO","JUNIO","JULIO","AGOSTO","SEPTIEMBRE","OCTUBRE","NOVIEMBRE","DICIEMBRE"], textvariable=mes)
-txtdia.grid(column=4,row=0)
-txtdia.current(0)
+lblmes=Label(marco, text="SELECCIONAR MES").grid(column=3,row=0,padx=5,pady=5)
+txtmes=ttk.Combobox(marco,values=["ENERO","FEBRERO","MARZO","ABRIL","MAYO","JUNIO","JULIO","AGOSTO","SEPTIEMBRE","OCTUBRE","NOVIEMBRE","DICIEMBRE"], textvariable=mes)
+txtmes.grid(column=4,row=0)
+txtmes.current(0)
+
+
 
 
 tvagenda=ttk.Treeview(marco, selectmode=NONE)

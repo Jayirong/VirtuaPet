@@ -64,7 +64,7 @@ txtraza.grid(column=3,row=2)
 txtraza.current(0)
 
 lbldia=Label(marco, text="DIA").grid(column=0,row=3,padx=5,pady=5)
-txtdia=ttk.Combobox(marco,values=["01","02","03","04","05","06","07","08","09","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31"], textvariable=dia)
+txtdia=ttk.Combobox(marco,values=["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31"], textvariable=dia)
 txtdia.grid(column=1,row=3)
 txtdia.current(0)
 
