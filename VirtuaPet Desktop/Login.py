@@ -6,7 +6,7 @@ import tkinter.messagebox as mymessagebox
 
 ventana= Tk()
 ventana.geometry("450x300")
-ventana.title("Gestion de Reserva")
+ventana.title("Inicio de Sesion")
 ventana['bg'] = '#a5aae0'
 
 

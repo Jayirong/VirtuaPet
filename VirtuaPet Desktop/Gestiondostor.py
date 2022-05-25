@@ -1,5 +1,7 @@
 from ast import Str
 from cProfile import label
+from email.mime import image
+from importlib.resources import path
 from tkinter import *
 from cgitb import text
 from email import message
@@ -9,11 +11,13 @@ from tkinter import messagebox
 from Connect import *
 from tkinter import *
 from tkinter import ttk
+from fpdf import *
+from fpdf import FPDF
 
 
 ventana= Tk()
 ventana.geometry("700x400")
-ventana.title("Gestion de Reserva")
+ventana.title("Generacion De Ficha Veterinaria")
 ventana['bg'] = '#a5aae0'
 
 
@@ -24,6 +28,10 @@ marco['bg'] = '#f1d7ff'
 
 
 f = ("Times bold", 14)
+
+
+
+
 
 db=DataBase()
 dia=StringVar()
@@ -96,7 +104,7 @@ txtpaciente.grid(column=1,row=3)
 
 
 lblpaciente=Label(ventana, text="MOTIVO").grid(column=0,row=4,padx=5,pady=5)
-txtpaciente=Entry(ventana, textvariable=numero)
+txtpaciente=Entry(ventana, textvariable=motivo)
 txtpaciente.grid(column=1,row=4)
 
 
@@ -136,11 +144,43 @@ btnNuevo.grid(column=1,row=6,padx=5,pady=5)
 
 
 btnNuevo=Button(ventana,text="ATRAS", command=lambda:volver())
+btnNuevo.grid(column=0,row=10,padx=5,pady=5)
+btnNuevo=Button(ventana,text="GENERAR ARCHIVO", command=lambda:pidief())
 btnNuevo.grid(column=1,row=10,padx=5,pady=5)
 
 
 
+def pidief():
+    pdf=FPDF()
+    pac=paciente.get()
+    fech=fecha.get()
+    nume=numero.get()
+    mot=motivo.get()
+    ana=anamnesis.get()
+    exaf=examenf.get()
+    exac=examenec.get()
+    obs=observaciones.get()
+    indc=indicaciones.get()
 
+    pdf.add_page()
+    pdf.set_font("Arial",size=12)
+    pdf.cell(200,10,txt="Ficha Veterinaria VetPerrito",ln=1,align="C")
+    pdf.cell(200,10,txt="Nombre del paciente: "+pac+",         Atendido El "+fech+"." ,ln=5,align="L")
+    pdf.cell(200,10,txt="Numero De contacto del Tutor: "+nume+"." ,ln=7,align="L")
+
+    pdf.cell(200,10,txt="Motivo De La Visita: "+mot, ln=9,align="L")
+    pdf.cell(200,10,txt="Anamnesis: "+ana, ln=11,align="L")
+    pdf.cell(200,10,txt="Examen Fisico: "+exaf, ln=13,align="L")
+    pdf.cell(200,10,txt="Examenes Complementarios: "+exac, ln=15,align="L")
+    pdf.cell(200,10,txt="Observaciones: "+obs, ln=17,align="L")
+    pdf.cell(200,10,txt="Indicaciones: "+indc, ln=19,align="L")
+    pdf.cell(200,10,txt=" VetPerrito.   ", ln=21,align="R")
+    pdf.image('img/logo.png',x=10,y=10,w=10,h=10,type="",link='')
+    
+
+    pdf.output("Ficha Veterinaria "+pac+".pdf")
+    messagebox.showinfo(message="Archivo Generado Correctamente", title="Archivo generado exitosamente")
+    
 
 def seleccionar(event):
     id= tvagenda.selection()[0]

@@ -6,7 +6,7 @@ from mysqlx import Column
 
 ventana= Tk()
 ventana.geometry("400x500")
-ventana.title("Menu")
+ventana.title("Menu Recepcion")
 ventana['bg'] = '#a5aae0'
 
 marco = LabelFrame(ventana)
@@ -56,7 +56,7 @@ Button(
 Button(
  marco,
 
- text="CREAR EXCEL"
+ text="CREAR ARCHIVO FICHAS"
  , 
   
     font=f,

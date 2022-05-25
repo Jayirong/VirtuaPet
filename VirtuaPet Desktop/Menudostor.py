@@ -6,7 +6,7 @@ from mysqlx import Column
 
 ventana= Tk()
 ventana.geometry("400x500")
-ventana.title("Menu")
+ventana.title("Menu Veterinario")
 ventana['bg'] = '#a5aae0'
 
 marco = LabelFrame(ventana)
@@ -23,7 +23,7 @@ def nextPage():
     
 def nextPage2():
    ventana.destroy()
-   import Excel
+   import Gestiondostor
 
     
 def nextPage3():

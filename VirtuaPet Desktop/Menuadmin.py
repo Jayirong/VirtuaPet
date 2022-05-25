@@ -6,7 +6,7 @@ from mysqlx import Column
 
 ventana= Tk()
 ventana.geometry("400x500")
-ventana.title("Menu")
+ventana.title("Menu Administrador")
 ventana['bg'] = '#a5aae0'
 
 marco = LabelFrame(ventana)
@@ -26,6 +26,9 @@ def nextPage2():
    import Registro
 
 
+def nextPage3():
+   ventana.destroy()
+   import Gestionadmin
 
 def destruir():
     ventana.destroy()
@@ -47,7 +50,7 @@ Button(
 
  text="GESTIONAR FICHAS"
  , 
-  
+    command=nextPage3,
     font=f,
    
     ).pack(fill=X, expand=TRUE, side=TOP,padx=5,pady=5
