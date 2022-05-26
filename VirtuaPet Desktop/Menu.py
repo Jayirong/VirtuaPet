@@ -25,7 +25,9 @@ def nextPage2():
    ventana.destroy()
    import Excel
 
-
+def nextPage3():
+    ventana.destroy()
+    import Informe
 
 def destruir():
     ventana.destroy()
@@ -45,9 +47,9 @@ Button(
 Button(
  marco,
 
- text="FICHAS"
+ text="INFORME C"
  , 
-  
+    command=nextPage3,
     font=f,
    
     ).pack(fill=X, expand=TRUE, side=TOP,padx=5,pady=5
