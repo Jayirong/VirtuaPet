@@ -1,3 +1,4 @@
+# ACA SE IMPORTAN TODAS LAS LIBRERIAS QUE UTILIZARE EN ESTA PAGINA spoiler(no las use todas)
 from ast import Str
 from cProfile import label
 from tkinter import *
@@ -12,24 +13,27 @@ from tkinter import ttk
 from fpdf import *
 from fpdf import FPDF
 
+## SE LLAMA EXCEL PERO GENERA PDF SOLO ME DA FLOJERA CAMBIAR EL CODIGO
 
+## "VENTANA" ES EL CUADRO QUE SE ABRE CONTENIENDO LA INFORMACION
 ventana= Tk()
 ventana.geometry("700x400")
 ventana.title("Generacion De Ficha Veterinaria")
 ventana['bg'] = '#a5aae0'
 
+##"MARCO" ES UNA VENTANA PARA MOTIVOS ESTETICOS
 
 marco = LabelFrame(ventana)
 marco.place(x=350,y=20,width=330,height=350)
 marco['bg'] = '#f1d7ff'
 
-
+## SE DEFINE EL FORMATO DEL TEXTO Y EL TAMAÑO
 
 f = ("Times bold", 14)
 
 
 
-
+##  SE DEFINEN LAS VARIABLES
 
 db=DataBase()
 dia=StringVar()
@@ -46,11 +50,14 @@ examenec=StringVar()
 indicaciones=StringVar()
 observaciones=StringVar()
 
+#SE DEFINE "lbldia" (CAJA DE TEXTO) & "txtdia" (CAJA DE ENTRADA)
+
 lbldia=Label(marco, text="PACIENTE").grid(column=1,row=0,padx=5,pady=5)
 txtdia=Entry(marco, textvariable=dia)
 txtdia.grid(column=2,row=0)
 
 
+## ESTE ES EL CUADRO QUE CONTIENE LA INFORMACION DE LA BDD (FONDO)
 
 tvagenda=ttk.Treeview(marco, selectmode=NONE)
 tvagenda.grid(column=0,row=1,columnspan=4,padx=5,pady=5)
@@ -67,7 +74,7 @@ tvagenda.column("Examenes_complementarios",width=0,stretch=NO)
 tvagenda.column("Indicaciones",width=0,stretch=NO)
 tvagenda.column("Observacion",width=0,stretch=NO)
 
-
+## ESTAS SON LOS TEXTOS DE LAS COLUMNAS
 
 
 tvagenda.heading("id",text="ID",anchor=CENTER)
@@ -81,9 +88,11 @@ tvagenda.heading("Examenes_complementarios",text="Examenes_complementarios",anch
 tvagenda.heading("Indicaciones",text="Indicaciones",anchor=CENTER)
 tvagenda.heading("Observacion",text="Observacion",anchor=CENTER)
 
-
+## HABILITA EL MODO DE SELECCION
 
 tvagenda.config(selectmode=BROWSE)
+
+## ESTAS SON LAS CAJAS DE TEXTO CON LAS ENTRADAS DE TEXO 
 
 lblpaciente=Label(ventana, text="DATOS DE LA FICHA").grid(column=1,row=0,padx=5,pady=5)
 
@@ -132,7 +141,7 @@ txtpaciente.grid(column=1,row=9)
 
 
 
-
+## ACA ESTAN LOS BOTONES 
 
 
 
@@ -143,22 +152,29 @@ btnNuevo.grid(column=1,row=6,padx=5,pady=5)
 
 btnNuevo=Button(ventana,text="ATRAS", command=lambda:volver())
 btnNuevo.grid(column=0,row=10,padx=5,pady=5)
+
+
 btnNuevo=Button(ventana,text="GENERAR ARCHIVO", command=lambda:pidief())
 btnNuevo.grid(column=1,row=10,padx=5,pady=5)
 
 
-
+## ESTA FUNCION CREA UN PDF 
 def pidief():
-    pdf=FPDF()
+    pdf=FPDF()   ## ESTO CREA UNA VARIABLE PDF
+ 
+    ##  ACA TOMAMOS LA INFORMACION DE LAS ENTRADAS DE TEXTO
+
     pac=paciente.get()
     fech=fecha.get()
-    nume=numero.get()
+    nume=numero.get()   
     mot=motivo.get()
     ana=anamnesis.get()
     exaf=examenf.get()
     exac=examenec.get()
     obs=observaciones.get()
     indc=indicaciones.get()
+
+    ## ACA SE GENERA UNA PAGINA DE EXCEL CON SUS ESPECIFICACIONES
 
     pdf.add_page()
     pdf.set_font("Arial",size=12)
@@ -173,13 +189,15 @@ def pidief():
     pdf.cell(200,10,txt="Observaciones: "+obs, ln=17,align="L")
     pdf.cell(200,10,txt="Indicaciones: "+indc, ln=19,align="L")
     pdf.cell(200,10,txt=" VetPerrito.   ", ln=21,align="R")
-    pdf.image('img/logo.png',x=10,y=10,w=10,h=10,type="",link='')
+    pdf.image('img/logo.png',x=10,y=10,w=10,h=10,type="",link='') 
     
 
     pdf.output("Ficha Veterinaria "+pac+".pdf")
+
+    ## ACA SE GENERA UN MENSAJE DE CONFIRMACION
     messagebox.showinfo(message="Archivo Generado Correctamente", title="Archivo generado exitosamente")
 
-
+ ## ESTA FUNCION TOMA LOS VALORES DE LA TREEVIEW Y LOS COLOCA EN LAS ENTRADAS DE TEXTO
 def seleccionar(event):
     id= tvagenda.selection()[0]
     if int(id)>0:
@@ -193,24 +211,30 @@ def seleccionar(event):
         indicaciones.set(tvagenda.item(id,"values")[8])
         observaciones.set(tvagenda.item(id,"values")[9])
 
+## ESTO PERMITE SELECCIONAR Y UTILIZA LA FUNCION seleccionar PARA COLOCAR LOS VALORES EN LA CAJA DE TEXTO ln 201
 
 tvagenda.bind("<<TreeviewSelect>>",seleccionar)
+
+## VUELVE AL MENU
 
 def volver():
     ventana.destroy()
     import Menu
     
+## ESTO DEJA LAS TABLAS VACIAS DE LA TREEVIEW
 
 def vaciatabla():
     filas= tvagenda.get_children()
     for fila in filas:
         tvagenda.delete(fila)
+
+##  ACA RELLENA LAS TABLAS FILTRANDOLAS POR EL PACIENTE       
      
 def llenatabla():
     vaciatabla()
     val=(dia.get())
   
-    sql="""select * from ficha where Paciente=%s """
+    sql="""select * from ficha where Paciente=%s """  # SECUENCIA SQL
     db.cursor.execute(sql,(val,))
     filas= db.cursor.fetchall()
     for fila in filas:
@@ -219,6 +243,6 @@ def llenatabla():
 
        
 
-
+## FIN DEL LOOP DE LA VENTANA
 
 ventana.mainloop()

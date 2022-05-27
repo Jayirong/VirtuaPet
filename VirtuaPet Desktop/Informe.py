@@ -10,12 +10,12 @@ from tkinter import ttk
 from fpdf import FPDF
 
 ventana= Tk()
-ventana.geometry("800x800")
+ventana.geometry("800x400")
 ventana.title("Informe de concurrencia")
 ventana['bg'] = '#a5aae0'
 
 marco = LabelFrame(ventana)
-marco.place(x=50,y=50,width=700,height=700)
+marco.place(x=50,y=50,width=700,height=300)
 marco['bg'] = '#f1d7ff'
 
 
@@ -71,13 +71,16 @@ txtdia.grid(column=1,row=4)
 txtdia.current(0)
 
 btnEliminar=Button(marco,text="FILTRAR POR MES", command=lambda:filtrar())
-btnEliminar.grid(column=3,row=6)
+btnEliminar.grid(column=3,row=6,padx=5,pady=5)
 
-btnEliminar=Button(marco,text="REINICIAR", command=lambda:llenatabla())
-btnEliminar.grid(column=2,row=6)
+btnEliminar=Button(marco,text="MOSTRAR TODO", command=lambda:llenatabla())
+btnEliminar.grid(column=2,row=6,padx=5,pady=5)
 
-btnEliminar=Button(marco,text="PDF", command=lambda:pidief())
-btnEliminar.grid(column=1,row=6)
+btnEliminar=Button(marco,text="GENERAR PDF POR MES", command=lambda:pidief())
+btnEliminar.grid(column=1,row=6,padx=5,pady=5)
+
+btnEliminar=Button(marco,text="ATRAS", command=lambda:atras())
+btnEliminar.grid(column=0,row=6,padx=5,pady=5)
 
 
 #funciones
@@ -109,6 +112,9 @@ def filtrar():
         tvagenda.insert("",END,id,text="id", values=fila)
 
 
+def atras():
+    ventana.destroy()
+    import Menu
 
 
 def llenatabla():

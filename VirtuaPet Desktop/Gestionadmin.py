@@ -163,7 +163,7 @@ def pidief():
     pdf.add_page()
     pdf.set_font("Arial",size=12)
     pdf.cell(200,10,txt="Ficha Veterinaria VetPerrito",ln=1,align="C")
-    pdf.cell(200,10,txt="Nombre del paciente: "+pac+",         Atendido El "+fech+"." ,ln=5,align="L")
+    pdf.cell(200,10,txt="Nombre del paciente: "+pac+",  Atendido El "+fech+"." ,ln=5,align="L")
     pdf.cell(200,10,txt="Numero De contacto del Tutor: "+nume+"." ,ln=7,align="L")
 
     pdf.cell(200,10,txt="Motivo De La Visita: "+mot, ln=9,align="L")

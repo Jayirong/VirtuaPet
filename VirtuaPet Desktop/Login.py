@@ -31,13 +31,19 @@ def ClicktoLogin():
 
        
     elif myresult[5]=='Administrador':
+        ventana.destroy()
         import Menuadmin
+      
         
     elif myresult[5]=='Veterinario':
+        ventana.destroy()
         import Menudostor  
+        
 
     elif myresult[5]=='Recepcion':
-        import Menu      
+        ventana.destroy()
+        import Menu   
+     
 
     else:
       mymessagebox.showerror("Error", "Usuario o contraseña incorrectos")   
@@ -72,7 +78,7 @@ PassTxt.place(x=120, y=90)
 
 
 
-PassTxt.config(show="*");
+PassTxt.config(show="*")
 
 LoginBtn = Button(marco, text ="Iniciar Sesion", command = ClicktoLogin, relief="groove")
 LoginBtn.place(x=150, y=140)

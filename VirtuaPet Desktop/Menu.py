@@ -21,6 +21,7 @@ def nextPage():
     ventana.destroy()
     import Main
     
+    
 def nextPage2():
    ventana.destroy()
    import Excel

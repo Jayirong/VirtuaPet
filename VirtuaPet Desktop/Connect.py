@@ -1,5 +1,7 @@
 import mysql.connector
  
+## ACA EL CODIGO SE CONCECCTA CON LA BDD
+
 class DataBase:
   def __init__(self):
       self.connection=mysql.connector.connect(

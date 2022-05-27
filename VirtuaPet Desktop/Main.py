@@ -10,13 +10,13 @@ f = ("Times bold", 14)
 
 
 #VENTANA
-ventana= Tk()
-ventana.geometry("760x520")
-ventana.title("Gestion de Reserva")
-ventana['bg'] = '#a5aae0'
+ventana1= Tk()
+ventana1.geometry("760x520")
+ventana1.title("Gestion de Reserva")
+ventana1['bg'] = '#a5aae0'
 
 
-marco = LabelFrame(ventana)
+marco = LabelFrame(ventana1)
 marco.place(x=50,y=50,width=660,height=420)
 marco['bg'] = '#f1d7ff'
 
@@ -203,7 +203,7 @@ def nuevo():
     
      if validar():
        val=(mes.get(),dia.get(),hora.get(),nombre.get(),apellido.get(),numero.get(),nombrem.get(),sexo.get(),raza.get())
-       sql="insert into agenda (Mes,Dia,Hora,Nombre,Apellido,Numero,Nombre_Mascota,Sexo_Mascota,Raza_Mascota) values (%s,%s,%s,%s,%s,%s,%s,%s)"
+       sql="insert into agenda (Mes,Dia,Hora,Nombre,Apellido,Numero,Nombre_Mascota,Sexo_Mascota,Raza_Mascota) values (%s,%s,%s,%s,%s,%s,%s,%s,%s)"
        db.cursor.execute(sql, val)
        db.connection.commit() 
        messagebox.showinfo("Aviso","Se Guardo El Registro Correctamente")
@@ -236,11 +236,12 @@ def actualizar():
 
 
 def nextPage():
-    ventana.destroy()
+    ventana1.destroy()
     import Menu
+    
 
 Button(
- ventana,
+ ventana1,
 
  text="ATRAS"
  , 
@@ -251,4 +252,4 @@ Button(
     )       
 
 llenatabla()
-ventana.mainloop()
+ventana1.mainloop()

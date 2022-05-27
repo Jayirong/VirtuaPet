@@ -1,9 +1,12 @@
+# ACA SE IMPORTAN TODAS LAS LIBRERIAS QUE UTILIZARE EN ESTA PAGINA
+
 from cgitb import text
 from sqlite3 import Date
 from tkinter import *
 from Connect import *
 from tkinter import messagebox
 
+## SE DEFINE EL FORMATO DEL TEXTO Y EL TAMAÑO
 f = ("Times bold", 14)
 
 
@@ -18,7 +21,7 @@ marco = LabelFrame(ventana)
 marco.place(x=50,y=50,width=730,height=420)
 marco['bg'] = '#f1d7ff'
 
-#Dentro del marco
+#SE DEFINEN LAS VARIABLES
 db=DataBase()
 modificar=False
 
@@ -34,6 +37,7 @@ examenec=StringVar()
 indicaciones=StringVar()
 observaciones=StringVar()
 
+## CAJAS DE TEXTO Y ENTRADAS
 
 lblMensaje=Label(marco,text="  TEXTO DE EJEMPLO ",width=50,height=3)
 lblMensaje.grid(column=0,row=0,columnspan=4,padx=5,pady=5)
@@ -83,20 +87,27 @@ txtuser=Entry(marco, textvariable=observaciones)
 txtuser.grid(column=1,row=9,padx=5,pady=5,ipadx=200)
 
 
+## BOTONES
+
+
 btnNuevo=Button(marco,text="ATRAS", command=lambda:volver())
 btnNuevo.grid(column=0,row=10,padx=5,pady=10)
 
 btnNuevo=Button(marco,text="GUARDAR", command=lambda:nuevo())
 btnNuevo.grid(column=1,row=10,padx=5,pady=10)
 
+##Funcion para volver al menu
+
 def volver():
     ventana.destroy()
     import Menudostor
     
+#revisa que las cajas no esten vacias   
 def validar():
     return len(paciente.get())>0 and len(fecha.get())>0 and  len(numero.get())>0 and  len(motivo.get())>0 and  len(anamnesis.get())>0 and  len(examenf.get())>0 and  len(examenec.get())>0 and  len(indicaciones.get())>0 and  len(observaciones.get())>0
     
 
+#crea una ficha usando los valores insertados en la caja de texto
 def nuevo():
    
     
