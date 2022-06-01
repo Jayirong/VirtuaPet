@@ -1,12 +1,14 @@
 from cmath import exp
+import string
 from tkinter import *
-
+from Login import yo
 from mysqlx import Column
+
 
 
 ventana= Tk()
 ventana.geometry("400x500")
-ventana.title("Menu Administrador")
+ventana.title("Menu Administrador de "+yo)
 ventana['bg'] = '#a5aae0'
 
 marco = LabelFrame(ventana)
@@ -32,6 +34,10 @@ def nextPage3():
 
 def destruir():
     ventana.destroy()
+
+def nextPage4():
+   ventana.destroy()
+   import Horadmin  
 
 
 Button(
@@ -68,8 +74,17 @@ Button(
     ).pack(fill=X, expand=TRUE, side=TOP,padx=5,pady=5
     )    
 
+Button(
+ marco,
 
-     
+ text="GESTIONAR HORARIOS"
+ , 
+  
+    font=f,
+    command=nextPage4
+   
+    ).pack(fill=X, expand=TRUE, side=TOP,padx=5,pady=5
+    )     
 
 Button(
  marco,

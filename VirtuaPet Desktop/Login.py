@@ -1,3 +1,5 @@
+import string
+from tokenize import String
 import mysql.connector as mysqlconnector
 import tkinter as mytk
 from tkinter import *
@@ -20,20 +22,26 @@ marco['bg'] = '#f1d7ff'
 
 
 
+
 def ClicktoLogin():
     
     mydb = mysqlconnector.connect(host="localhost", user="root", password="", database="virtuapet2")
     mycursor = mydb.cursor()
     mycursor.execute("SELECT * FROM personas where User = '"+ UserTxt.get() +"' and Clave = '"+ PassTxt.get() +"';")
     myresult = mycursor.fetchone()
+   
+    global yo
+    yo = myresult[1]
+
     if myresult==None:
        mymessagebox.showerror("Error", "Usuario o contraseña incorrectos")
 
        
     elif myresult[5]=='Administrador':
+        
         ventana.destroy()
         import Menuadmin
-      
+       
         
     elif myresult[5]=='Veterinario':
         ventana.destroy()
@@ -69,7 +77,7 @@ UserTxt.place(x=120, y=60)
 
 UserTxt.focus()
 
-PassLabel = Label(marco, text = "Contraseña :", width=10)
+PassLabel = Label(marco, text = "Contraseña:", width=10)
 PassLabel.place(x=20, y=90)
 
 PassTxt = Entry(marco,  width=27, relief="flat")

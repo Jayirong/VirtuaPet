@@ -37,6 +37,11 @@ dia=StringVar()
 
 #Los lables con caja de texto
 
+sql="select horarios from Horarios"
+db.cursor.execute(sql)
+horas= db.cursor.fetchall()
+lista =list(horas)
+
 lblnombre=Label(marco, text="NOMBRE").grid(column=0,row=0,padx=5,pady=5),
 txtnombre=Entry(marco, textvariable=nombre)
 txtnombre.grid(column=1,row=0)
@@ -74,7 +79,7 @@ txtdia.grid(column=1,row=4)
 txtdia.current(0)
 
 lblhora=Label(marco, text="HORA").grid(column=2,row=3,padx=5,pady=5)
-txthora=ttk.Combobox(marco,values=["13:00","14:00","15:00","16:00","17:00","18:00"], textvariable=hora)
+txthora=ttk.Combobox(marco,values=lista, textvariable=hora)
 txthora.grid(column=3,row=3)
 txthora.current(0)
 

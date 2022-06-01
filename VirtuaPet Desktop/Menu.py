@@ -2,11 +2,11 @@ from cmath import exp
 from tkinter import *
 
 from mysqlx import Column
-
+from Login import yo
 
 ventana= Tk()
 ventana.geometry("400x500")
-ventana.title("Menu Recepcion")
+ventana.title("Menu Recepcion De "+yo)
 ventana['bg'] = '#a5aae0'
 
 marco = LabelFrame(ventana)
@@ -15,6 +15,8 @@ marco['bg'] = '#f1d7ff'
 
 
 f = ("Times bold", 14)
+
+
 
 def nextPage():
    

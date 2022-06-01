@@ -1,12 +1,12 @@
 from cmath import exp
 from tkinter import *
-
+from Login import yo
 from mysqlx import Column
 
 
 ventana= Tk()
 ventana.geometry("400x500")
-ventana.title("Menu Veterinario")
+ventana.title("Menu Veterinario de "+yo)
 ventana['bg'] = '#a5aae0'
 
 marco = LabelFrame(ventana)

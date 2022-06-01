@@ -8,7 +8,7 @@ from Connect import *
 from tkinter import *
 from tkinter import ttk
 from fpdf import FPDF
-
+#parametros de la ventana
 ventana= Tk()
 ventana.geometry("800x400")
 ventana.title("Informe de concurrencia")
@@ -18,7 +18,7 @@ marco = LabelFrame(ventana)
 marco.place(x=50,y=50,width=700,height=300)
 marco['bg'] = '#f1d7ff'
 
-
+#se definene variables
 db=DataBase()
 
 
@@ -34,7 +34,7 @@ hora=StringVar()
 dia=StringVar()
 
 
-
+#cuadro con la info de la bdd
 
 tvagenda=ttk.Treeview(marco, selectmode=NONE)
 tvagenda.grid(column=0,row=5,columnspan=4,padx=5)
@@ -63,7 +63,7 @@ tvagenda.heading("Nombre_Mascota",text="Nombre_M",anchor=CENTER)
 tvagenda.heading("Sexo_Mascota",text="Sexo_M",anchor=CENTER)
 tvagenda.heading("Raza_Mascota",text="Especie",anchor=CENTER)
 
-
+#botones
 
 lbldia=Label(marco, text="MES").grid(column=0,row=4,padx=5,pady=5)
 txtdia=ttk.Combobox(marco,values=["ENERO","FEBRERO","MARZO","ABRIL","MAYO","JUNIO","JULIO","AGOSTO","SEPTIEMBRE","OCTUBRE","NOVIEMBRE","DICIEMBRE"], textvariable=mes)
@@ -131,7 +131,7 @@ def vaciatabla():
     for fila in filas:
         tvagenda.delete(fila)
 
-
+#se genera el pdf
 def pidief():
     mess=mes.get()
     plus=1

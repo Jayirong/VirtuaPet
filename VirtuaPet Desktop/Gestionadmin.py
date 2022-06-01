@@ -12,7 +12,7 @@ from tkinter import ttk
 from fpdf import *
 from fpdf import FPDF
 
-
+#VENTANA y sus parametros
 ventana= Tk()
 ventana.geometry("700x400")
 ventana.title("Generacion De Ficha Veterinaria")
@@ -28,7 +28,7 @@ marco['bg'] = '#f1d7ff'
 f = ("Times bold", 14)
 
 
-
+#se definen las variables
 
 
 db=DataBase()
@@ -46,12 +46,14 @@ examenec=StringVar()
 indicaciones=StringVar()
 observaciones=StringVar()
 
+#caja de texto paciente y entrada de texto
+
 lbldia=Label(marco, text="PACIENTE").grid(column=1,row=0,padx=5,pady=5)
 txtdia=Entry(marco, textvariable=dia)
 txtdia.grid(column=2,row=0)
 
 
-
+#cuadro con la info de la bdd
 tvagenda=ttk.Treeview(marco, selectmode=NONE)
 tvagenda.grid(column=0,row=1,columnspan=4,padx=5,pady=5)
 tvagenda["columns"]=("id","Paciente","Fecha","Numero","Motivo_consulta","Anamnesis","Examen_fisico","Examenes_complementarios","Indicaciones","Observacion")
@@ -84,6 +86,8 @@ tvagenda.heading("Observacion",text="Observacion",anchor=CENTER)
 
 
 tvagenda.config(selectmode=BROWSE)
+
+#cajas de texto
 
 lblpaciente=Label(ventana, text="DATOS DE LA FICHA").grid(column=1,row=0,padx=5,pady=5)
 
@@ -132,7 +136,7 @@ txtpaciente.grid(column=1,row=9)
 
 
 
-
+#botones
 
 
 
@@ -146,8 +150,8 @@ btnNuevo.grid(column=0,row=10,padx=5,pady=5)
 btnNuevo=Button(ventana,text="GENERAR ARCHIVO", command=lambda:pidief())
 btnNuevo.grid(column=1,row=10,padx=5,pady=5)
 
-
-
+#funciones
+#generacion del pdf
 def pidief():
     pdf=FPDF()
     pac=paciente.get()
@@ -179,7 +183,7 @@ def pidief():
     pdf.output("Ficha Veterinaria "+pac+".pdf")
     messagebox.showinfo(message="Archivo Generado Correctamente", title="Archivo generado exitosamente")
 
-
+#llena la info de las cajas
 def seleccionar(event):
     id= tvagenda.selection()[0]
     if int(id)>0:
