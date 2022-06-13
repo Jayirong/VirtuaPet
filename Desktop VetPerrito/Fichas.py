@@ -12,14 +12,17 @@ f = ("Times bold", 14)
 
 #VENTANA
 ventana= Tk()
-ventana.geometry("830x520")
+ventana.geometry("1000x600")
 ventana.title("Ficha Medica")
 ventana['bg'] = '#a5aae0'
 
+imagen = PhotoImage(file = "img/fichaMedica.png")
+background = Label(image = imagen, text = "Imagen de fondo")
+background.place(x = 0, y = 0, relwidth = 1, relheight = 1)
 
-marco = LabelFrame(ventana)
-marco.place(x=50,y=50,width=730,height=420)
-marco['bg'] = '#f1d7ff'
+imagen1 = PhotoImage(file = "img/Boton_Guardar.png")
+imagen2 = PhotoImage(file = "img/BotónVolver_FichaMedica.png")
+
 
 #SE DEFINEN LAS VARIABLES
 db=DataBase()
@@ -39,62 +42,60 @@ observaciones=StringVar()
 
 ## CAJAS DE TEXTO Y ENTRADAS
 
-lblMensaje=Label(marco,text="  TEXTO DE EJEMPLO ",width=50,height=3)
-lblMensaje.grid(column=0,row=0,columnspan=4,padx=5,pady=5)
 
 
 
-lblpaciente=Label(marco, text="Paciente").grid(column=0,row=1,padx=5,pady=5),
-txtpaciente=Entry(marco, textvariable=paciente)
-txtpaciente.grid(column=1,row=1,ipadx=200)
 
-lblfecha=Label(marco, text="Fecha").grid(column=0,row=2,padx=5,pady=5),
-txtfecha=Entry(marco, textvariable=fecha)
-txtfecha.grid(column=1,row=2,ipadx=200)
+#"Paciente"
+txtpaciente=Entry(ventana, textvariable=paciente,width=39)
+txtpaciente.place(x=50, y=133)
 
-lblnumero=Label(marco, text="Numero").grid(column=0,row=3,padx=5,pady=5),
-txtnumero=Entry(marco, textvariable=numero)
-txtnumero.grid(column=1,row=3,ipadx=200)
+#"Fecha"
+txtfecha=Entry(ventana, textvariable=fecha,width=29)
+txtfecha.place(x=320, y=133)
 
-lblmotiv=Label(marco, text="Motivo de la visita").grid(column=0,row=4,padx=5,pady=5),
-txtmotiv=Entry(marco,textvariable=motivo )
+#lblnumero=Label(ventana, text="Numero").grid(column=0,row=3,padx=5,pady=5),
+txtnumero=Entry(ventana, textvariable=numero,width=30)
+txtnumero.place(x=525, y=133)
 
-txtmotiv.grid(column=1,row=4,padx=5,pady=5, ipadx=200)
+#lblmotiv=Label(ventana, text="Motivo de la visita").grid(column=0,row=4,padx=5,pady=5),
+txtmotiv=Entry(ventana,textvariable=motivo,width=70)
 
-lblanam=Label(marco, text="Anamnesis").grid(column=0,row=5,padx=5,pady=5),
-txtanam=Entry(marco, textvariable=anamnesis)
+txtmotiv.place(x=50, y=205,height=35)
 
-txtanam.grid(column=1,row=5,padx=5,pady=5,ipadx=200)
+#lblanam=Label(ventana, text="Anamnesis").grid(column=0,row=5,padx=5,pady=5),
+txtanam=Entry(ventana, textvariable=anamnesis,width=70)
 
-lblfisc=Label(marco, text="Examen Fisico").grid(column=0,row=6,padx=5,pady=5),
-txtfisc=Entry(marco, textvariable=examenf)
+txtanam.place(x=510, y=305,height=35)
 
-txtfisc.grid(column=1,row=6,padx=5,pady=5,ipadx=200)
+#lblfisc=Label(ventana, text="Examen Fisico").grid(column=0,row=6,padx=5,pady=5),
+txtfisc=Entry(ventana, textvariable=examenf,width=70)
 
-lblexc=Label(marco, text="Examenes Complementario").grid(column=0,row=7,padx=5,pady=5),
-txtexc=Entry(marco, textvariable=examenec)
+txtfisc.place(x=510, y=205,height=35)
 
-txtexc.grid(column=1,row=7,padx=5,pady=5,ipadx=200)
+#lblexc=Label(ventana, text="Examenes Complementario").grid(column=0,row=7,padx=5,pady=5),
+txtexc=Entry(ventana, textvariable=examenec,width=70)
 
-lblind=Label(marco, text="Indicaciones").grid(column=0,row=8,padx=5,pady=5),
-txtind=Entry(marco, textvariable=indicaciones)
+txtexc.place(x=50, y=305,height=35)
 
-txtind.grid(column=1,row=8,padx=5,pady=5,ipadx=200)
+#lblind=Label(ventana, text="Indicaciones").grid(column=0,row=8,padx=5,pady=5),
+txtind=Entry(ventana, textvariable=indicaciones,width=70)
 
-lbluser=Label(marco, text="Observaciones").grid(column=0,row=9,padx=5,pady=5),
-txtuser=Entry(marco, textvariable=observaciones)
+txtind.place(x=510, y=400,height=35)
 
-txtuser.grid(column=1,row=9,padx=5,pady=5,ipadx=200)
+#lbluser=Label(ventana, text="Observaciones").grid(column=0,row=9,padx=5,pady=5),
+txtuser=Entry(ventana, textvariable=observaciones,width=70)
+txtuser.place(x=50, y=400,height=35)
 
 
 ## BOTONES
 
 
-btnNuevo=Button(marco,text="ATRAS", command=lambda:volver())
-btnNuevo.grid(column=0,row=10,padx=5,pady=10)
+btnNuevo=Button(ventana,text="ATRAS", command=lambda:volver(),image=imagen2)
+btnNuevo.place(x=35, y=530)
 
-btnNuevo=Button(marco,text="GUARDAR", command=lambda:nuevo())
-btnNuevo.grid(column=1,row=10,padx=5,pady=10)
+btnNuevo=Button(ventana,text="GUARDAR", command=lambda:nuevo(),image=imagen1)
+btnNuevo.place(x=630, y=530)
 
 ##Funcion para volver al menu
 

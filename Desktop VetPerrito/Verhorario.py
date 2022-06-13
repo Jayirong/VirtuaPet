@@ -6,6 +6,7 @@ from tkinter import messagebox
 from Connect import *
 from tkinter import *
 from tkinter import ttk
+from tkinter import PhotoImage
 
 f = ("Times bold", 14)
 
@@ -13,46 +14,54 @@ f = ("Times bold", 14)
 
 #VENTANA
 ventana= Tk()
-ventana.geometry("780x420")
+ventana.geometry("1000x600")
 ventana.title("Gestion de Reserva")
 ventana['bg'] = '#a5aae0'
 
 
-marco = LabelFrame(ventana)
-marco.place(x=50,y=50,width=680,height=320)
-marco['bg'] = '#f1d7ff'
+imagen = PhotoImage(file = "img/VerReservas.png")
+background = Label(image = imagen, text = "Imagen de fondo")
+background.place(x = 0, y = 0, relwidth = 1, relheight = 1)
+
+f = ("Times bold", 14)
+
+imagenbuscar = PhotoImage(file = "img/Boton_Buscar.png")
+imagengenerar = PhotoImage(file = "img/BotónGenerarArchivo_GenerarFicha.png")
+imagenatras = PhotoImage(file = "img/Boton_Atras.png")
+
+#se definen las variables
 
 db=DataBase()
 dia=IntVar()
 mes=StringVar()
 
-lbldia=Label(marco, text="SELECCIONAR DIAR").grid(column=1,row=0,padx=5,pady=5)
-txtdia=ttk.Combobox(marco,values=["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31"], textvariable=dia)
-txtdia.grid(column=2,row=0)
+
+txtdia=ttk.Combobox(ventana,values=["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31"], textvariable=dia,width=25)
+txtdia.place(x=285, y=110,height=30)
 txtdia.current(0)
 
-lblmes=Label(marco, text="SELECCIONAR MES").grid(column=3,row=0,padx=5,pady=5)
-txtmes=ttk.Combobox(marco,values=["ENERO","FEBRERO","MARZO","ABRIL","MAYO","JUNIO","JULIO","AGOSTO","SEPTIEMBRE","OCTUBRE","NOVIEMBRE","DICIEMBRE"], textvariable=mes)
-txtmes.grid(column=4,row=0)
+
+txtmes=ttk.Combobox(ventana,values=["ENERO","FEBRERO","MARZO","ABRIL","MAYO","JUNIO","JULIO","AGOSTO","SEPTIEMBRE","OCTUBRE","NOVIEMBRE","DICIEMBRE"], textvariable=mes,width=25)
+txtmes.place(x=740, y=110,height=30)
 txtmes.current(0)
 
 
 
 
-tvagenda=ttk.Treeview(marco, selectmode=NONE)
-tvagenda.grid(column=1,row=5,columnspan=4,padx=5,pady=5)
+tvagenda=ttk.Treeview(ventana, selectmode=NONE,height=14)
+tvagenda.place(x=115, y=180)
 tvagenda["columns"]=("id","Mes","Dia","Hora","Nombre","Apellido","Numero","Nombre_Mascota","Sexo_Mascota","Raza_Mascota")
 tvagenda.column("#0",width=0,stretch=NO)
-tvagenda.column("id",width=10,anchor=CENTER)
-tvagenda.column("Mes",width=70,anchor=CENTER)
-tvagenda.column("Dia",width=30,anchor=CENTER)
-tvagenda.column("Hora",width=50,anchor=CENTER)
-tvagenda.column("Nombre",width=80,anchor=CENTER)
-tvagenda.column("Apellido",width=80,anchor=CENTER)
-tvagenda.column("Numero",width=90,anchor=CENTER)
-tvagenda.column("Nombre_Mascota",width=70,anchor=CENTER)
-tvagenda.column("Sexo_Mascota",width=70,anchor=CENTER)
-tvagenda.column("Raza_Mascota",width=90,anchor=CENTER)
+tvagenda.column("id",width=20,anchor=CENTER)
+tvagenda.column("Mes",width=80,anchor=CENTER)
+tvagenda.column("Dia",width=40,anchor=CENTER)
+tvagenda.column("Hora",width=60,anchor=CENTER)
+tvagenda.column("Nombre",width=90,anchor=CENTER)
+tvagenda.column("Apellido",width=90,anchor=CENTER)
+tvagenda.column("Numero",width=100,anchor=CENTER)
+tvagenda.column("Nombre_Mascota",width=110,anchor=CENTER)
+tvagenda.column("Sexo_Mascota",width=90,anchor=CENTER)
+tvagenda.column("Raza_Mascota",width=100,anchor=CENTER)
 
 
 tvagenda.heading("id",text="ID",anchor=CENTER)
@@ -73,12 +82,15 @@ tvagenda.heading("Raza_Mascota",text="Especie",anchor=CENTER)
 
 
 
-btnNuevo=Button(marco,text="BUSCAR", command=lambda:llenatabla())
-btnNuevo.grid(column=2,row=6,padx=5,pady=5)
+btnNuevo=Button(ventana,text="BUSCAR", command=lambda:llenatabla(),image=imagenbuscar)
+btnNuevo.place(x=680, y=526)
 
 
-btnNuevo=Button(marco,text="ATRAS", command=lambda:volver())
-btnNuevo.grid(column=1,row=6,padx=5,pady=5)
+btnNuevo=Button(ventana,text="ATRAS", command=lambda:volver() ,image=imagenatras)
+btnNuevo.place(x=35, y=526)
+
+
+
 
 def volver():
     ventana.destroy()

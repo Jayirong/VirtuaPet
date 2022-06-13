@@ -17,23 +17,22 @@ from fpdf import FPDF
 
 ## "VENTANA" ES EL CUADRO QUE SE ABRE CONTENIENDO LA INFORMACION
 ventana= Tk()
-ventana.geometry("700x400")
+ventana.geometry("1000x600")
 ventana.title("Generacion De Ficha Veterinaria")
 ventana['bg'] = '#a5aae0'
 
-##"MARCO" ES UNA VENTANA PARA MOTIVOS ESTETICOS
 
-marco = LabelFrame(ventana)
-marco.place(x=350,y=20,width=330,height=350)
-marco['bg'] = '#f1d7ff'
-
-## SE DEFINE EL FORMATO DEL TEXTO Y EL TAMAÑO
+imagen = PhotoImage(file = "img/GenerarFicha.png")
+background = Label(image = imagen, text = "Imagen de fondo")
+background.place(x = 0, y = 0, relwidth = 1, relheight = 1)
 
 f = ("Times bold", 14)
 
+imagenbuscar = PhotoImage(file = "img/BotónBuscar_GenerarFicha.png")
+imagengenerar = PhotoImage(file = "img/BotónGenerarArchivo_GenerarFicha.png")
+imagenatras = PhotoImage(file = "img/Boton_Atras.png")
+#se definen las variables
 
-
-##  SE DEFINEN LAS VARIABLES
 
 db=DataBase()
 dia=StringVar()
@@ -50,22 +49,21 @@ examenec=StringVar()
 indicaciones=StringVar()
 observaciones=StringVar()
 
-#SE DEFINE "lbldia" (CAJA DE TEXTO) & "txtdia" (CAJA DE ENTRADA)
-
-lbldia=Label(marco, text="PACIENTE").grid(column=1,row=0,padx=5,pady=5)
-txtdia=Entry(marco, textvariable=dia)
-txtdia.grid(column=2,row=0)
+#caja de texto paciente y entrada de texto
 
 
-## ESTE ES EL CUADRO QUE CONTIENE LA INFORMACION DE LA BDD (FONDO)
+txtdia=Entry(ventana,width=37, textvariable=dia)
+txtdia.place(x=710,y=130,height=25)
 
-tvagenda=ttk.Treeview(marco, selectmode=NONE)
-tvagenda.grid(column=0,row=1,columnspan=4,padx=5,pady=5)
+
+#cuadro con la info de la bdd
+tvagenda=ttk.Treeview(ventana, selectmode=NONE)
+tvagenda.place(x=595, y=200)
 tvagenda["columns"]=("id","Paciente","Fecha","Numero","Motivo_consulta","Anamnesis","Examen_fisico","Examenes_complementarios","Indicaciones","Observacion")
 tvagenda.column("#0",width=0,stretch=NO)
 tvagenda.column("id",width=10,anchor=CENTER)
-tvagenda.column("Paciente",width=150,anchor=CENTER)
-tvagenda.column("Fecha",width=150,anchor=CENTER)
+tvagenda.column("Paciente",width=170,anchor=CENTER)
+tvagenda.column("Fecha",width=170,anchor=CENTER)
 tvagenda.column("Numero",width=0,stretch=NO)
 tvagenda.column("Motivo_consulta",width=0,stretch=NO)
 tvagenda.column("Anamnesis",width=0,stretch=NO)
@@ -74,7 +72,7 @@ tvagenda.column("Examenes_complementarios",width=0,stretch=NO)
 tvagenda.column("Indicaciones",width=0,stretch=NO)
 tvagenda.column("Observacion",width=0,stretch=NO)
 
-## ESTAS SON LOS TEXTOS DE LAS COLUMNAS
+
 
 
 tvagenda.heading("id",text="ID",anchor=CENTER)
@@ -88,75 +86,71 @@ tvagenda.heading("Examenes_complementarios",text="Examenes_complementarios",anch
 tvagenda.heading("Indicaciones",text="Indicaciones",anchor=CENTER)
 tvagenda.heading("Observacion",text="Observacion",anchor=CENTER)
 
-## HABILITA EL MODO DE SELECCION
+
 
 tvagenda.config(selectmode=BROWSE)
 
-## ESTAS SON LAS CAJAS DE TEXTO CON LAS ENTRADAS DE TEXO 
-
-lblpaciente=Label(ventana, text="DATOS DE LA FICHA").grid(column=1,row=0,padx=5,pady=5)
+#cajas de texto
 
 
-lblpaciente=Label(ventana, text="PACIENTE").grid(column=0,row=1,padx=5,pady=5)
-txtpaciente=Entry(ventana, textvariable=paciente)
-txtpaciente.grid(column=1,row=1)
 
-lblpaciente=Label(ventana, text="FECHA").grid(column=0,row=2,padx=5,pady=5)
-txtpaciente=Entry(ventana, textvariable=fecha)
-txtpaciente.grid(column=1,row=2)
 
-lblpaciente=Label(ventana, text="NUMERO").grid(column=0,row=3,padx=5,pady=5)
+
+txtpaciente=Entry(ventana,width=37, textvariable=paciente)
+txtpaciente.place(x=35, y=165)
+
+
+txtpaciente=Entry(ventana,width=17, textvariable=fecha)
+txtpaciente.place(x=290, y=165)
+
+
 txtpaciente=Entry(ventana, textvariable=numero)
-txtpaciente.grid(column=1,row=3)
-
-
-lblpaciente=Label(ventana, text="MOTIVO").grid(column=0,row=4,padx=5,pady=5)
-txtpaciente=Entry(ventana, textvariable=motivo)
-txtpaciente.grid(column=1,row=4)
-
-
-lblpaciente=Label(ventana, text="ANAMNESIS").grid(column=0,row=5,padx=5,pady=5)
-txtpaciente=Entry(ventana, textvariable=anamnesis)
-txtpaciente.grid(column=1,row=5)
-
-lblpaciente=Label(ventana, text="EXAMEN FISICO").grid(column=0,row=6,padx=5,pady=5)
-txtpaciente=Entry(ventana, textvariable=examenf)
-txtpaciente.grid(column=1,row=6)
-
-
-lblpaciente=Label(ventana, text="EXAMENES COMPLEMENTARIOS").grid(column=0,row=7,padx=5,pady=5)
-txtpaciente=Entry(ventana, textvariable=examenec)
-txtpaciente.grid(column=1,row=7)
-
-
-lblpaciente=Label(ventana, text="INDICACIONES").grid(column=0,row=8,padx=5,pady=5)
-txtpaciente=Entry(ventana, textvariable=indicaciones)
-txtpaciente.grid(column=1,row=8)
-
-lblpaciente=Label(ventana, text="OBSERVACION").grid(column=0,row=9,padx=5,pady=5)
-txtpaciente=Entry(ventana, textvariable=observaciones)
-txtpaciente.grid(column=1,row=9)
+txtpaciente.place(x=420, y=165)
 
 
 
+txtpaciente=Entry(ventana,width=37, textvariable=motivo)
 
-
-## ACA ESTAN LOS BOTONES 
-
-
-
-btnNuevo=Button(marco,text="BUSCAR", command=lambda:llenatabla())
-btnNuevo.grid(column=1,row=6,padx=5,pady=5)
+txtpaciente.place(x=35, y=220,height=60)
 
 
 
-btnNuevo=Button(ventana,text="ATRAS", command=lambda:volver())
-btnNuevo.grid(column=0,row=10,padx=5,pady=5)
+txtpaciente=Entry(ventana, textvariable=anamnesis,width=40)
+txtpaciente.place(x=295, y=330,height=50)
+
+txtpaciente=Entry(ventana,width=40, textvariable=examenf)
+txtpaciente.place(x=295, y=220,height=60)
 
 
-btnNuevo=Button(ventana,text="GENERAR ARCHIVO", command=lambda:pidief())
-btnNuevo.grid(column=1,row=10,padx=5,pady=5)
+txtpaciente=Entry(ventana,width=37, textvariable=examenec)
+txtpaciente.place(x=35, y=330,height=50)
 
+
+
+txtpaciente=Entry(ventana,width=37, textvariable=indicaciones)
+txtpaciente.place(x=35, y=435,height=55)
+
+
+txtpaciente=Entry(ventana,width=40, textvariable=observaciones)
+txtpaciente.place(x=295, y=435,height=55)
+
+
+
+
+
+#botones
+
+
+
+btnNuevo=Button(ventana,text="BUSCAR", command=lambda:llenatabla(),image=imagenbuscar)
+btnNuevo.place(x=563, y=534)
+
+
+
+btnNuevo=Button(ventana,text="ATRAS", command=lambda:volver(),image=imagenatras)
+btnNuevo.place(x=40, y=534)
+btnNuevo=Button(ventana,text="GENERAR ARCHIVO", command=lambda:pidief(),image=imagengenerar)
+btnNuevo.place(x=220, y=534)
 
 ## ESTA FUNCION CREA UN PDF 
 def pidief():

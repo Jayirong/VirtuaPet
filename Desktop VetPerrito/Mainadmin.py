@@ -11,14 +11,17 @@ f = ("Times bold", 14)
 
 #VENTANA
 ventana= Tk()
-ventana.geometry("760x520")
+ventana.geometry("1000x600")
 ventana.title("Gestion de Reserva")
 ventana['bg'] = '#a5aae0'
 
-
-marco = LabelFrame(ventana)
-marco.place(x=50,y=50,width=660,height=420)
-marco['bg'] = '#f1d7ff'
+imagen = PhotoImage(file = "img/GestionReserva.png")
+background = Label(image = imagen, text = "Imagen de fondo")
+background.place(x = 0, y = 0, relwidth = 1, relheight = 1)
+imagenatras  = PhotoImage(file = "img/BotonVolver_GestionReserva.png")
+imageneliminar  = PhotoImage(file = "img/BotonEliminar_GestionReserva.png")
+imagenseleccionar = PhotoImage(file = "img/BotonSeleccionar_GestionReserva.png")
+imagenuardar  = PhotoImage(file = "img/BotonGuardar_GestionReserva.png")
 
 #Dentro del marco
 db=DataBase()
@@ -41,68 +44,70 @@ sql="select horarios from Horarios"
 db.cursor.execute(sql)
 horas= db.cursor.fetchall()
 lista =list(horas)
+    
 
-lblnombre=Label(marco, text="NOMBRE").grid(column=0,row=0,padx=5,pady=5),
-txtnombre=Entry(marco, textvariable=nombre)
-txtnombre.grid(column=1,row=0)
 
-lblapellido=Label(marco, text="APELLIDO").grid(column=0,row=1,padx=5,pady=5)
-txtapellido=Entry(marco, textvariable=apellido)
-txtapellido.grid(column=1,row=1)
+#lblnombre=Label(ventana1, text="NOMBRE").place(x=520, y=60),
+txtnombre=Entry(ventana, textvariable=nombre, width=55)
+txtnombre.place(x=40, y=128)
 
-lblnombrem=Label(marco, text="NOMBRE MASCOTA").grid(column=2,row=0,padx=5,pady=5)
-txtnombrem=Entry(marco, textvariable=nombrem)
-txtnombrem.grid(column=3,row=0)
+#lblapellido=Label(ventana1, text="APELLIDO").place(x=520, y=60)
+txtapellido=Entry(ventana, textvariable=apellido, width=55)
+txtapellido.place(x=40, y=188)
 
-lblsexo=Label(marco, text="SEXO MASCOTA").grid(column=2,row=1,padx=5,pady=5)
-txtsexo=ttk.Combobox(marco,values=["Masculino","Femenino"], textvariable=sexo)
-txtsexo.grid(column=3,row=1)
+#lblnombrem=Label(ventana1, text="NOMBRE MASCOTA").place(x=520, y=60)
+txtnombrem=Entry(ventana, textvariable=nombrem, width=55)
+txtnombrem.place(x=40, y=368)
+
+#lblsexo=Label(ventana1, text="SEXO MASCOTA").place(x=520, y=60)
+txtsexo=ttk.Combobox(ventana,values=["Macho","Hembra"], textvariable=sexo)
+txtsexo.place(x=40, y=425)
 txtsexo.current(0)
 
-lblnumero=Label(marco, text="NUMERO").grid(column=0,row=2,padx=5,pady=5)
-txtnumero=Entry(marco, textvariable=numero)
-txtnumero.grid(column=1,row=2)
+#lblnumero=Label(ventana1, text="NUMERO").place(x=520, y=60)
+txtnumero=Entry(ventana, textvariable=numero, width=55)
+txtnumero.place(x=40, y=248)
 
-lblraza=Label(marco, text="ESPECIE").grid(column=2,row=2,padx=5,pady=5)
-txtraza=ttk.Combobox(marco,values=["Perro","Gato","Hamster","Tortuga","Conejo","Otros"], textvariable=raza)
-txtraza.grid(column=3,row=2)
+#lblraza=Label(ventana1, text="ESPECIE").place(x=520, y=60)
+txtraza=ttk.Combobox(ventana,values=["Perro","Gato","Hamster","Tortuga","Conejo","Otros"], textvariable=raza)
+txtraza.place(x=218, y=425)
 txtraza.current(0)
 
-lbldia=Label(marco, text="DIA").grid(column=0,row=3,padx=5,pady=5)
-txtdia=ttk.Combobox(marco,values=["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31"], textvariable=dia)
-txtdia.grid(column=1,row=3)
+#lbldia=Label(ventana1, text="DIA").place(x=520, y=60)
+txtdia=ttk.Combobox(ventana,values=["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31"], textvariable=dia)
+txtdia.place(x=40, y=308,width=100)
 txtdia.current(0)
 
-lbldia=Label(marco, text="MES").grid(column=0,row=4,padx=5,pady=5)
-txtdia=ttk.Combobox(marco,values=["ENERO","FEBRERO","MARZO","ABRIL","MAYO","JUNIO","JULIO","AGOSTO","SEPTIEMBRE","OCTUBRE","NOVIEMBRE","DICIEMBRE"], textvariable=mes)
-txtdia.grid(column=1,row=4)
+#lbldia=Label(ventana1, text="MES").place(x=520, y=60)
+txtdia=ttk.Combobox(ventana,values=["ENERO","FEBRERO","MARZO","ABRIL","MAYO","JUNIO","JULIO","AGOSTO","SEPTIEMBRE","OCTUBRE","NOVIEMBRE","DICIEMBRE"], textvariable=mes)
+txtdia.place(x=155, y=308,width=100)
 txtdia.current(0)
 
-lblhora=Label(marco, text="HORA").grid(column=2,row=3,padx=5,pady=5)
-txthora=ttk.Combobox(marco,values=lista, textvariable=hora)
-txthora.grid(column=3,row=3)
+#lblhora=Label(ventana1, text="HORA").place(x=520, y=60)
+txthora=ttk.Combobox(ventana,values=lista, textvariable=hora)
+txthora.place(x=270, y=308,width=100)
 txthora.current(0)
 
 
-lblMensaje=Label(marco,text="Texto en verde ᵃ",fg="green")
-lblMensaje.grid(column=1,row=4,columnspan=4,padx=5,pady=5)
+#lblMensaje=Label(ventana1,text="Texto en verde ᵃ",fg="green")
+#lblMensaje.place(x=320, y=60)
 
 #CUADRADO CON LA BDD
 
-tvagenda=ttk.Treeview(marco, selectmode=NONE)
-tvagenda.grid(column=0,row=5,columnspan=4,padx=5)
+tvagenda=ttk.Treeview(ventana, selectmode=NONE)
+tvagenda.place(x=410, y=130,height=360)
 tvagenda["columns"]=("id","Mes","Dia","Hora","Nombre","Apellido","Numero","Nombre_Mascota","Sexo_Mascota","Raza_Mascota")
 tvagenda.column("#0",width=0,stretch=NO)
 tvagenda.column("id",width=10,anchor=CENTER)
-tvagenda.column("Mes",width=70,anchor=CENTER)
-tvagenda.column("Dia",width=30,anchor=CENTER)
-tvagenda.column("Hora",width=50,anchor=CENTER)
-tvagenda.column("Nombre",width=80,anchor=CENTER)
-tvagenda.column("Apellido",width=80,anchor=CENTER)
-tvagenda.column("Numero",width=90,anchor=CENTER)
-tvagenda.column("Nombre_Mascota",width=70,anchor=CENTER)
-tvagenda.column("Sexo_Mascota",width=70,anchor=CENTER)
-tvagenda.column("Raza_Mascota",width=90,anchor=CENTER)
+tvagenda.column("Mes",width=60,anchor=CENTER)
+tvagenda.column("Dia",width=25,anchor=CENTER)
+tvagenda.column("Hora",width=40,anchor=CENTER)
+tvagenda.column("Nombre",width=70,anchor=CENTER)
+tvagenda.column("Apellido",width=70,anchor=CENTER)
+tvagenda.column("Numero",width=70,anchor=CENTER)
+tvagenda.column("Nombre_Mascota",width=60,anchor=CENTER)
+tvagenda.column("Sexo_Mascota",width=60,anchor=CENTER)
+tvagenda.column("Raza_Mascota",width=70,anchor=CENTER)
 
 
 tvagenda.heading("id",text="ID",anchor=CENTER)
@@ -123,14 +128,14 @@ tvagenda.heading("Raza_Mascota",text="Especie",anchor=CENTER)
 #Botones 
 
 
-btnNuevo=Button(marco,text="GUARDAR", command=lambda:nuevo())
-btnNuevo.grid(column=0,row=6)
+btnNuevo=Button(ventana,text="GUARDAR", command=lambda:nuevo(),image=imagenuardar)
+btnNuevo.place(x=820, y=525) 
 
-btnActualizar=Button(marco,text="SELECCIONAR", command=lambda:actualizar())
-btnActualizar.grid(column=1,row=6)
+btnActualizar=Button(ventana,text="SELECCIONAR", command=lambda:actualizar(),image=imagenseleccionar)
+btnActualizar.place(x=600, y=525) 
 
-btnEliminar=Button(marco,text="ELIMINAR", command=lambda:eliminar())
-btnEliminar.grid(column=3,row=6)
+btnEliminar=Button(ventana,text="ELIMINAR", command=lambda:eliminar(),image=imageneliminar)
+btnEliminar.place(x=440, y=525)  
 
 
 
@@ -184,7 +189,7 @@ def vaciatabla():
 #llenar tabla fila por fila
 def llenatabla():
     vaciatabla()
-    sql="select * from agenda"
+    sql="select * from agenda order by id desc"
     db.cursor.execute(sql)
     filas= db.cursor.fetchall()
     for fila in filas:
@@ -198,11 +203,11 @@ def eliminar():
         db.cursor.execute(sql)
         db.connection.commit()
         tvagenda.delete(id)
-        lblMensaje.config(text="se elimino el registro")
+     
         messagebox.showinfo("Aviso","Se Elimino El Registro Correctamente")
         limpiar()
     else:
-        lblMensaje.config(text="no se a seleccionado un registro para eliminar")
+        messagebox.showinfo("Aviso","no se a seleccionado un registro para eliminar")
 def nuevo():
     if modificar==False:
     
@@ -248,12 +253,11 @@ Button(
  ventana,
 
  text="ATRAS"
- , 
+ , image=imagenatras,
   
     font=f,
     command=nextPage
-    ).pack(side=BOTTOM,padx=5,pady=5
-    )       
+    ).place(x=35, y=525)     
 
 llenatabla()
 ventana.mainloop()

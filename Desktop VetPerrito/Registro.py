@@ -12,14 +12,22 @@ f = ("Times bold", 14)
 
 #VENTANA
 ventana= Tk()
-ventana.geometry("800x520")
+ventana.geometry("1000x600")
 ventana.title("Gestion de Reserva")
 ventana['bg'] = '#a5aae0'
 
 
-marco = LabelFrame(ventana)
-marco.place(x=50,y=50,width=700,height=420)
-marco['bg'] = '#f1d7ff'
+imagen = PhotoImage(file = "img/GestionUsuarios.png")
+background = Label(image = imagen, text = "Imagen de fondo")
+background.place(x = 0, y = 0, relwidth = 1, relheight = 1)
+
+f = ("Times bold", 14)
+
+imageneliminar = PhotoImage(file = "img/Boton_Eliminar.png")
+imagenseleccionar = PhotoImage(file = "img/Boton_Seleccionar.png")
+imagenguardar = PhotoImage(file = "img/Boton_Guardar.png")
+imagenatras = PhotoImage(file = "img/Boton_Atras.png")
+#se definen las variables
 
 #Dentro del marco
 db=DataBase()
@@ -36,55 +44,55 @@ Num=StringVar()
 
 #Los lables con caja de texto
 
-lbluser=Label(marco, text="Usuario").grid(column=0,row=0,padx=5,pady=5),
-txtuser=Entry(marco, textvariable=User)
-txtuser.grid(column=1,row=0)
+#lbluser=Label(ventana, text="Usuario").place(x=50, y=305)
+txtuser=Entry(ventana, textvariable=User)
+txtuser.place(x=40, y=128,width=330)
 
-lblclave=Label(marco, text="Contraseña").grid(column=0,row=1,padx=5,pady=5)
-txtclave=Entry(marco, textvariable=Clave)
-txtclave.grid(column=1,row=1)
+#lblclave=Label(ventana, text="Contraseña").place(x=50, y=305)
+txtclave=Entry(ventana, textvariable=Clave)
+txtclave.place(x=40, y=188,width=330)
 
-lblNom=Label(marco, text="Nombre").grid(column=2,row=0,padx=5,pady=5)
-txtNom=Entry(marco, textvariable=Nom)
-txtNom.grid(column=3,row=0)
+#lblNom=Label(ventana, text="Nombre").place(x=50, y=305)
+txtNom=Entry(ventana, textvariable=Nom)
+txtNom.place(x=40, y=307,width=330)
 
-lblNum=Label(marco, text="Numero").grid(column=2,row=2,padx=5,pady=5)
-txtNum=ttk.Entry(marco, textvariable=Num)
-txtNum.grid(column=3,row=2)
-
-
+#lblNum=Label(ventana, text="Numero").place(x=50, y=305)
+txtNum=Entry(ventana, textvariable=Num)
+txtNum.place(x=40, y=432,width=330)
 
 
-lbltipo=Label(marco, text="Perfil De Usuario").grid(column=0,row=2,padx=5,pady=5)
-txttipo=ttk.Combobox(marco,values=["Administrador","Veterinario","Recepcion"], textvariable=Tipo)
-txttipo.grid(column=1,row=2)
+
+
+#lbltipo=Label(ventana, text="Perfil De Usuario").place(x=50, y=305)
+txttipo=ttk.Combobox(ventana,values=["Administrador","Veterinario","Recepcion"], textvariable=Tipo)
+txttipo.place(x=40, y=248,width=330)
 txttipo.current(0)
 
 
-lblApe=Label(marco, text="Apellido").grid(column=2,row=1,padx=5,pady=5)
-txtApe=ttk.Entry(marco, textvariable=Ape)
-txtApe.grid(column=3,row=1)
+#lblApe=Label(ventana, text="Apellido").place(x=50, y=305)
+txtApe=Entry(ventana, textvariable=Ape)
+txtApe.place(x=40, y=368,width=330)
 
 
 
 
 
 
-lblMensaje=Label(marco,text="Texto en verde ᵃ",fg="green")
-lblMensaje.grid(column=0,row=3,columnspan=4,padx=2,pady=2)
+
 
 #CUADRADO CON LA BDD
 
-tvpersonas=ttk.Treeview(marco, selectmode=NONE)
-tvpersonas.grid(column=0,row=5,columnspan=4,padx=5,pady=5)
+tvpersonas=ttk.Treeview(ventana, selectmode=NONE,height=17)
+
+tvpersonas.place(x=400, y=128)
 tvpersonas["columns"]=("Id","Nom","Ape","User","Clave","Tipo","Num")
 tvpersonas.column("#0",width=0,stretch=NO)
 tvpersonas.column("Id",width=10,anchor=CENTER)
-tvpersonas.column("Nom",width=100,anchor=CENTER)
+tvpersonas.column("Nom",width=90,anchor=CENTER)
 tvpersonas.column("Ape",width=100,anchor=CENTER)
-tvpersonas.column("User",width=150,anchor=CENTER)
+tvpersonas.column("User",width=70,anchor=CENTER)
 tvpersonas.column("Clave",width=70,anchor=CENTER)
-tvpersonas.column("Tipo",width=130,anchor=CENTER)
+tvpersonas.column("Tipo",width=100,anchor=CENTER)
 tvpersonas.column("Num",width=100,anchor=CENTER)
 
 
@@ -107,14 +115,14 @@ tvpersonas.heading("Num",text="Numero",anchor=CENTER)
 
 
 
-btnNuevo=Button(marco,text="GUARDAR", command=lambda:nuevo())
-btnNuevo.grid(column=0,row=6)
+btnNuevo=Button(ventana,text="GUARDAR", command=lambda:nuevo(),image=imagenguardar)
+btnNuevo.place(x=820, y=525)
 
-btnActualizar=Button(marco,text="SELECCIONAR", command=lambda:actualizar())
-btnActualizar.grid(column=1,row=6)
+btnActualizar=Button(ventana,text="SELECCIONAR", command=lambda:actualizar(),image=imagenseleccionar)
+btnActualizar.place(x=600, y=525)
 
-btnEliminar=Button(marco,text="ELIMINAR", command=lambda:eliminar())
-btnEliminar.grid(column=3,row=6)
+btnEliminar=Button(ventana,text="ELIMINAR", command=lambda:eliminar(),image=imageneliminar)
+btnEliminar.place(x=440, y=525)
 
 
 
@@ -186,11 +194,11 @@ def eliminar():
         db.cursor.execute(sql)
         db.connection.commit()
         tvpersonas.delete(id)
-        lblMensaje.config(text="se elimino el Usuario")
+       
         messagebox.showinfo("Aviso","Se Elimino El Usuario Correctamente")
         limpiar()
     else:
-        lblMensaje.config(text="no se a seleccionado un Usuario para eliminar")
+        messagebox.showinfo("Aviso","no se a seleccionado un Usuario para eliminar")
 def nuevo():
     if modificar==False:
     
@@ -240,8 +248,9 @@ Button(
   
     font=f,
     command=nextPage
-    ).pack(side=BOTTOM,padx=5,pady=5
-    )       
+    ,image=imagenatras,
+    ).place(x=42, y=528)
+        
 
 
 llenatabla()

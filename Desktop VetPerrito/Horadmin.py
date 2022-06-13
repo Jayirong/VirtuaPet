@@ -11,15 +11,18 @@ f = ("Times bold", 14)
 
 #VENTANA Y SUS PARAMETROS
 ventana= Tk()
-ventana.geometry("760x520")
-ventana.title("Gestion de Reserva")
+ventana.geometry("1000x600")
+ventana.title("Gestion de Horarios de reserva")
 ventana['bg'] = '#a5aae0'
 
 
-marco = LabelFrame(ventana)
-marco.place(x=50,y=50,width=660,height=420)
-marco['bg'] = '#f1d7ff'
-
+imagen = PhotoImage(file = "img/Horas.png")
+background = Label(image = imagen, text = "Imagen de fondo")
+background.place(x = 0, y = 0, relwidth = 1, relheight = 1)
+imagenatras  = PhotoImage(file = "img/Boton_Atras.png")
+imageneliminar  = PhotoImage(file = "img/BotonEliminar_GestionReserva.png")
+imagenseleccionar = PhotoImage(file = "img/BotonSeleccionar_GestionReserva.png")
+imagenuardar  = PhotoImage(file = "img/BotóneGuardar_Horas.png")
 #Dentro del marco
 db=DataBase()
 
@@ -28,22 +31,22 @@ amp=StringVar()
 
 #CUADRADO CON LA BDD
 
-tvagenda=ttk.Treeview(marco, selectmode=NONE)
-tvagenda.grid(column=0,row=5,columnspan=4,padx=5)
+tvagenda=ttk.Treeview(ventana, selectmode=NONE,height=15)
+tvagenda.place(x=200,y=165)
 tvagenda["columns"]=("id","horarios")
 tvagenda.column("#0",width=0,stretch=NO)
 
 tvagenda.column("id",width=0,stretch=NO)
-tvagenda.column("horarios",width=200,anchor=CENTER)
+tvagenda.column("horarios",width=600,anchor=CENTER)
 
 tvagenda.heading("id",text="ID",anchor=CENTER)
 tvagenda.heading("horarios",text="Horarios",anchor=CENTER)
 
 
 
-lblhora=Label(marco, text="HORA('00:00' AM/PM)").grid(column=1,row=1,padx=5,pady=5)
-txthora=Entry(marco, textvariable=hora)
-txthora.grid(column=2,row=1)
+
+txthora=Entry(ventana, textvariable=hora)
+txthora.place(x=500,y=110,width=260,height=28)
 
 
 
@@ -117,11 +120,11 @@ def nextPage():
     ventana.destroy()
     import Menuadmin         
 
-btnNuevo=Button(marco,text="GUARDAR", command=lambda:nuevo())
-btnNuevo.grid(column=1,row=6,padx=5,pady=5)         
-btnNuevo=Button(marco,text="ELIMINAR", command=lambda:eliminar())
-btnNuevo.grid(column=2,row=6,padx=5,pady=5)      
-btnNuevo=Button(marco,text="VOLVER", command=lambda:nextPage())
-btnNuevo.grid(column=3,row=6,padx=5,pady=5)  
+btnNuevo=Button(ventana,text="GUARDAR", command=lambda:nuevo(),image=imagenuardar)
+btnNuevo.place(x=670,y=532)           
+btnNuevo=Button(ventana,text="ELIMINAR", command=lambda:eliminar(),image=imageneliminar)
+btnNuevo.place(x=495,y=532)     
+btnNuevo=Button(ventana,text="VOLVER", command=lambda:nextPage(),image=imagenatras)
+btnNuevo.place(x=35,y=532)
 llenatabla()
 ventana.mainloop()

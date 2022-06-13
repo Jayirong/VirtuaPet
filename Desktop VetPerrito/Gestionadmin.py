@@ -53,8 +53,8 @@ txtdia.place(x=710,y=130,height=25)
 
 
 #cuadro con la info de la bdd
-tvagenda=ttk.Treeview(ventana, selectmode=NONE)
-tvagenda.place(x=595, y=200)
+tvagenda=ttk.Treeview(ventana, selectmode=NONE,height=14)
+tvagenda.place(x=595, y=185)
 tvagenda["columns"]=("id","Paciente","Fecha","Numero","Motivo_consulta","Anamnesis","Examen_fisico","Examenes_complementarios","Indicaciones","Observacion")
 tvagenda.column("#0",width=0,stretch=NO)
 tvagenda.column("id",width=10,anchor=CENTER)

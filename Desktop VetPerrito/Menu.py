@@ -38,7 +38,7 @@ def destruir():
 imagen = PhotoImage(file = "img/imagen1.png")
 background = Label(image = imagen, text = "Imagen de fondo")
 imagengestion = PhotoImage(file = "img/Boton_Gestion_Reservas.png")
-imagengestionf = PhotoImage(file = "img/Boton_Generar_Archivo.png")
+imagengestionf = PhotoImage(file = "img/BotonInformeConcurrencia_Menu.png")
 imagengestionH = PhotoImage(file = "img/Boton_Gestionar_fichas.png")
 imagengestionU = PhotoImage(file = "img/Boton_Gestionar_Usuarios.png")
 perrochikito = PhotoImage(file = "img/logochikito.png")
@@ -51,7 +51,7 @@ LoginBtn = Button(ventana, text ="", command = nextPage, relief="groove" , image
 LoginBtn.place(x=60, y=60)
 
 LoginBtn = Button(ventana, text ="", command = nextPage3, relief="groove" , image=imagengestionf)
-LoginBtn.place(x=520, y=60)
+LoginBtn.place(x=530, y=60)
 
 
 
