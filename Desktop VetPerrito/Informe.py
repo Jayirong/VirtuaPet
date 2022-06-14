@@ -11,6 +11,7 @@ from fpdf import FPDF
 #parametros de la ventana
 ventana= Tk()
 ventana.geometry("1000x600")
+ventana.resizable(width = False, height = False)
 ventana.title("Informe de concurrencia")
 ventana['bg'] = '#a5aae0'
 

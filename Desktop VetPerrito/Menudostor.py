@@ -6,6 +6,7 @@ from mysqlx import Column
 
 ventana= Tk()
 ventana.geometry("1000x600")
+ventana.resizable(width = False, height = False)
 ventana.title("Menu Veterinario de ")
 ventana['bg'] = '#a5aae0'
 

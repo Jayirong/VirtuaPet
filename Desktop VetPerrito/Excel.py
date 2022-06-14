@@ -18,6 +18,7 @@ from fpdf import FPDF
 ## "VENTANA" ES EL CUADRO QUE SE ABRE CONTENIENDO LA INFORMACION
 ventana= Tk()
 ventana.geometry("1000x600")
+ventana.resizable(width = False, height = False)
 ventana.title("Generacion De Ficha Veterinaria")
 ventana['bg'] = '#a5aae0'
 

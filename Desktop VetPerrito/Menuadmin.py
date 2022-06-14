@@ -8,6 +8,7 @@ from tkinter import PhotoImage
 
 ventana= Tk()
 ventana.geometry("1000x600")
+ventana.resizable(width = False, height = False)
 ventana.title("Menu Administrador de ")
 ventana['bg'] = '#a5aae0'
 

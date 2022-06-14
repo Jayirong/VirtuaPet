@@ -9,6 +9,7 @@ from tkinter import ttk
 
 ventana= Tk()
 ventana.geometry("1000x600")
+ventana.resizable(width = False, height = False)
 ventana.title("Inicio de Sesion")
 ventana['bg'] = ''
 

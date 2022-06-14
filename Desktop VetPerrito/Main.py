@@ -14,6 +14,7 @@ f = ("Times bold", 14)
 #VENTANA
 ventana1= Tk()
 ventana1.geometry("1000x600")
+ventana1.resizable(width = False, height = False)
 ventana1.title("Gestion de Reserva")
 ventana1['bg'] = '#a5aae0'
 

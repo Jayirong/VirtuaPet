@@ -15,6 +15,7 @@ from fpdf import FPDF
 #VENTANA y sus parametros
 ventana= Tk()
 ventana.geometry("1000x600")
+ventana.resizable(width = False, height = False)
 ventana.title("Generacion De Ficha Veterinaria")
 ventana['bg'] = '#a5aae0'
 
