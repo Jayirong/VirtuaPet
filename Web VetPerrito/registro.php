@@ -1,6 +1,5 @@
 <?php 
     include ('server.php');
-
 ?>
 
 <!DOCTYPE html> 
@@ -99,13 +98,13 @@
                                     <label for="Hora">Ingrese su hora:</label>
                                     <?php
                                         $conexion = mysqli_connect("localhost","root","","virtuapet2");
-                                        $s = mysqli_query($conexion,"SELECT * FROM Horarios")
+                                        $s = mysqli_query($conexion,"SELECT * FROM horarios")
                                     ?>
                                     <select class="form-control" id="Hora" name="Hora" required  value="<?php echo $Hora; ?>"> 
                                         <?php
                                         while($r = mysqli_fetch_array($s)){
                                             ?>
-                                            <option> <?php echo $r['Horarios']; ?> </option> 
+                                            <option> <?php echo $r['horarios']; ?> </option> 
                                             <?php
                                         }
                                         ?>
@@ -204,8 +203,9 @@
 </footer>
 
   <!--JS -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-  <script src="js/validar.js"></script>
+   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="js/scripts.js"></script>
+        <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
   
 </body>
 </html>

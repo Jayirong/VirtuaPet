@@ -45,29 +45,34 @@
                 <div class="row text-center">
 
                     <div class="col-md-4">
-                        <img src="assets/img/Veterinaria.jpg" height="350px" width="270px" alt="..." />
+                        <span class="fa-stack fa-4x">
+                            <i class="fas fa-laptop fa-stack-2x text-primary"></i>
+                            <i class="fas fa-map fa-stack-1x"></i>
+                        </span>
+                        <h4 class="my-3">Facil Acceso</h4>
+                        <p class="text-muted">En VetPerrito puedes encontrar la mejor atencion para tu mascota, a solo pasos de tu hogar.</p>
+                        <p class="text-muted">Asunción 2114, Maipú, RM</p>
                     </div>
 
                     <div class="col-md-4">
-                        <span class="fa-stack fa-4x">
-                            <i class="fas fs-circle fa-stack-2x text-primary"></i>
-                            <i class="fas fa-laptop fa-stack-1x"></i>
-                        </span>
-                        <h4 class="my-3">Rapido y Sencillo</h4>
-                        <p class="text-muted">Con nuestra pagina web trabajando en conjunto a nuestro sistema VirtuaPet, reservar y atender a los pacientes nunca ha sido mas rapido y comodo.</p>
+                        <img src="assets/img/Veterinaria.jpg" height="400px" width="370px" alt="..." />
                     </div>
 
                     <div class="col-md-4">
-                        <span class="fa-stack fa-4x">
-                        </span>
-                    </div>
-
+                        <div class="mapouter">
+                            <div class="gmap_canvas">
+                                <iframe width="400" height="400" id="gmap_canvas" src="https://maps.google.com/maps?q=Asunci%C3%B3n%202114,%20Maip%C3%BA,%20Regi%C3%B3n%20Metropolitana&t=&z=15&ie=UTF8&iwloc=&output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe>
+                                <a href="https://123movies-to.org">123 movies</a>
+                                <br>
+                                <style>.mapouter{position:relative;text-align:right;height:400px;width:400px;}</style>
+                                <a href="https://www.embedgooglemap.net">embedgooglemap.net</a><style>.gmap_canvas {overflow:hidden;background:none!important;height:400px;width:400px;}</style>
+                            </div>
+                        </div>
+                    </div>                    
+                    
                 </div>
             </div>
         </section>
-
-        <br>
-        <br>
 
         <footer class="footer py-4">
             <div class="container">

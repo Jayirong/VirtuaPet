@@ -38,7 +38,39 @@
 
         <br>
         <br>
+        
+        <section class="page-section">
+            <div class="container">
+                <div class="row text-center">
+                    <div class="col-md-4">
+                        <p class="text-muted"></p>
+                    </div>
 
+                    <div class="col-md-4">
+                        <p class="text-muted">El sistema Virtuapet no autoriza el uso indebido del programa ni la mala utilizacion del sistema de reservas de la pagina web VetPerrito
+                            Cualquier agenda reservada por demio de la Web VetPerrito sera moderada y organizada por un administrador de la veterinaria desde sus oficinas.
+                        </p>
+                            <br>
+                        <p class="text-muted">
+                            El sistema Virtuapet funciona con un sistema confidencial y cerrado, nunca se pediran datos de tarjetas de credito, debito ni otro tipo de pago desde la pagina web, estas transacciones seran efectuadas desde la Veterinaria el dia de asistencia.
+
+                            El sistema creado con PHP, Python y Sqli sera desarrollado y actualizado durante unos meses para efectuar cambios y mejoras a largo plazo.
+                        </p>
+                        <br>
+                        <p class="text-muted">
+                            El sistema creado con PHP, Python y Sqli sera desarrollado y actualizado durante unos meses para efectuar cambios y mejoras a largo plazo.
+                        </p>
+                    </div>
+
+                    <div class="col-md-4">
+                        <p class="text-muted"></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        
 
         <footer class="footer py-4">
             <div class="container">

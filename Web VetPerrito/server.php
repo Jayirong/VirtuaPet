@@ -1,6 +1,4 @@
 <?php
-
-    include_once 'server.php';
     session_start();
 
     //variables
@@ -10,7 +8,6 @@
     $Nombre_Mascota = "";
     $Raza_Mascota = "";
     $Sexo_Mascota = "";
-    $Dia = "";
     $Hora = "";
 
     $Email = "";
@@ -20,24 +17,28 @@
     $FMes = "";
     $FAno = "";
 
+    $errores = array();
+
     //conexion a BBDD
-    $db = mysqli_connect('localhost', 'root', '', 'virtuapet2');
-    if(!$db){
-        die('Error en la conexion con la Base de Datos:' .mysql_error());
-       }
+    require_once 'conexion.php';
 
 
     //registro
     if (isset($_POST["botonsubida"])) {
-        $Nombre = mysqli_real_escape_string($db, $_POST["Nombre"]);
-        $Apellido = mysqli_real_escape_string($db, $_POST["Apellido"]);
-        $Numero = mysqli_real_escape_string($db, $_POST["Numero"]);
-        $Nombre_Mascota = mysqli_real_escape_string($db, $_POST["Nombre_Mascota"]);
-        $Raza_Mascota = mysqli_real_escape_string($db, $_POST["Raza_Mascota"]);
-        $Sexo_Mascota = mysqli_real_escape_string($db, $_POST["Sexo_Mascota"]);
-        $Hora = mysqli_real_escape_string($db, $_POST["Hora"]);
 
-        $Email = mysqli_real_escape_string($db, $_POST["Email"]);
+        function cleanup($data){
+            return mysql_real_escape_string(trim(htmlentities(strip_tags($data))));
+        }
+
+        $Nombre = mysqli_real_escape_string($conn, $_POST["Nombre"]);
+        $Apellido = mysqli_real_escape_string($conn, $_POST["Apellido"]);
+        $Numero = mysqli_real_escape_string($conn, $_POST["Numero"]);
+        $Nombre_Mascota = mysqli_real_escape_string($conn, $_POST["Nombre_Mascota"]);
+        $Raza_Mascota = mysqli_real_escape_string($conn, $_POST["Raza_Mascota"]);
+        $Sexo_Mascota = mysqli_real_escape_string($conn, $_POST["Sexo_Mascota"]);
+        $Hora = mysqli_real_escape_string($conn, $_POST["Hora"]);
+
+        $Email = mysqli_real_escape_string($conn, $_POST["Email"]);
 
         // Separacion de datos de la fecha
         $Fecha = $_POST["Fecha"];
@@ -66,46 +67,94 @@
         if (empty($Email)) {array_push($errors, "Correo electronico Requerido");}
         if (empty($Fecha)) {array_push($errors, "Fecha de reserva Requerida");}
 
-        // Registro 
-        $query = "INSERT INTO agendamaxima (Nombre, Apellido, Numero, Nombre_Mascota, Raza_Mascota, Sexo_Mascota, Hora, Dia, Mes, Año, Email) 
-            VALUES('$Nombre', '$Apellido', '$Numero', '$Nombre_Mascota', '$Raza_Mascota', '$Sexo_Mascota', '$Hora', '$FDia', '$FMes', '$FAno', '$Email')";
-        mysqli_query($db, $query) or die(mysqli_error());
-        $_SESSION['Nombre'] = $Nombre;
-        $_SESSION['success'] = "Registro Exitoso";
-        header('location: index.php');
 
-        $query = "INSERT INTO emails (Email) 
+        // Confirmacion de Fechas
+        $sql = "SELECT * FROM fechas
+        WHERE (Hora = '".$Hora."' AND Dia = '".$FDia."' AND Mes = '".$FMes."' AND Año = '".$FAno."')";
+
+        $resultado = $conn -> query($sql);
+        $row_count = $resultado -> num_rows;
+
+        // Validacion
+
+        if($row_count){
+            $errores['mensaje']='Ya esta ingresado';}
+            
+
+        if(!empty($errores)){
+
+            echo 'Hay errores en los datos del sistema. ';
+
+        } else {
+
+            // Registro 
+            $query = "INSERT INTO agenda (Mes, Dia, Hora, Nombre, Apellido, Numero, Nombre_Mascota, Sexo_Mascota, Raza_Mascota) 
+            VALUES('$FMes', '$FDia', '$Hora', '$Nombre', '$Apellido', '$Numero', '$Nombre_Mascota', '$Sexo_Mascota', '$Raza_Mascota')";
+            mysqli_query($conn, $query) or die(mysqli_error());
+            $_SESSION['Nombre'] = $Nombre;
+            $_SESSION['success'] = "Registro Exitoso";
+            header('location: index.php');
+
+            $query = "INSERT INTO emails (Email) 
             VALUES('$Email')";
-        mysqli_query($db, $query) or die(mysqli_error());
+            mysqli_query($conn, $query) or die(mysqli_error());
 
-        // require_once "PHPMailer/PHPMailer.php";
-        // require_once "PHPMailer/SMTP.php";
-        // require_once "PHPMailer/Exception.php";
+            $query = "INSERT INTO fechas (Fechaentera, Dia, Mes, Año, Hora) 
+            VALUES('$Fecha', '$FDia', '$FMes', '$FAno', '$Hora')";
+            mysqli_query($conn, $query) or die(mysqli_error());
 
-        // $mail = new PHPMailer;
+            if($conn->query($sql)===TRUE){
+                echo "Registro Exitoso";
+            }
 
-       
-        // $mail->isSMTP();
-        // $mail->Host = "smtp.gmail.com";
-        // $mail->SMTPAuth = true;
-        // $mail->Username = "vetperritoveterinaria@gmail.com";
-        // $mail->Password = 'Vetperrito22';
-        // $mail->SMTPSecure = 'ssl';
-        // $mail->Port = 465;
+        }
 
-        // $mail->isHTML(isHTML: true);
-        // $mail->setFrom('vetperritoveterinaria@gmail.com', 'Veterinaria');
-        // $mail->addAddress(address: $Email);
+        if($row_count){
+            echo 'Ha ocurrido un error en su solicitud, esta hora ya esta registrada.';
+        }
+        
 
-        // $mail->Subject = 'Here is the subject';
-        // $mail->Body    = 'This is the HTML message body <b>in bold!</b>';
-        // $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
+        // Sistema de PHP Mailer implementado, pero no funcional.
 
-        // if(!$mail->send()) {
-        //     echo 'Message could not be sent.';
-        //     echo 'Mailer Error: ' . $mail->ErrorInfo;
-        // } else {
-        //     echo 'Message has been sent';
-        // }
+        require_once "PHPMailer/PHPMailer.php";
+        require_once "PHPMailer/SMTP.php";
+        require_once "PHPMailer/Exception.php";
+
+        // Formato y creacion de correo electronico
+
+        $mail = new PHPMailer(true);
+        $mailid = $Email;
+        $subject = "Recordatorio de clinica veterinaria VetPerrito";
+        $text_message = "Muchas gracias por contar con nosotros.";
+        $message = "Se recuerda cordialmente que su hora del dia "||$CDia||" a las "||$CHora||" ha sido solicitada correctamente";
+
+        try
+        {
+        $mail->IsSMTP();
+        $mail->isHTML(true);
+        $mail->SMTPDebug = 0;
+        $mail->SMTPAuth = true;
+        $mail->SMTPSecure = "ssl";
+        $mail->Host = "smtp.gmail.com";
+        $mail->Port = '465';
+        $mail->AddAddress($mailid);
+        $mail->Username ="vetperritoveterinaria@gmail.com";
+        $mail->Password ="Vetperrito22";
+        $mail->SetFrom('vetperritoveterinaria@gmail.com','Veterinaria VetPerrito');
+        $mail->AddReplyTo("vetperritoveterinaria@gmail.com","Veterinaria VetPerrito");
+        $mail->Subject = $subject;
+        $mail->Body = $message;
+        $mail->AltBody = $message;
+        if($mail->Send())
+        {
+        echo "Gracias por su preferencia, Se ha enviado un correo electronico como recordatorio.";
+        }
+        }
+        catch(phpmailerException $ex)
+        {
+        $msg = "
+        ".$ex->errorMessage()."
+        ";
+        }
     }
 ?>

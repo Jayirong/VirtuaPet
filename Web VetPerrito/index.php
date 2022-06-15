@@ -47,6 +47,10 @@
             </div>
         </header>
 
+<br>
+<br>
+<br>
+
         <!-- Texto -->
         <section class="page-section" id="services">
             <div class="container">
@@ -54,7 +58,7 @@
                 <div class="row text-center">
                     <div class="col-md-4">
                         <span class="fa-stack fa-4x">
-                            <i class="fas fs-circle fa-stack-2x text-primary"></i>
+                            <i class="fas fa-heart fa-stack-2x text-primary"></i>
                             <i class="fas fa-heart fa-stack-1x"></i>
                         </span>
                         <h4 class="my-3">Comprometidos con la Vida</h4>
@@ -62,7 +66,7 @@
                     </div>
                     <div class="col-md-4">
                         <span class="fa-stack fa-4x">
-                            <i class="fas fs-circle fa-stack-2x text-primary"></i>
+                            <i class="fas fa-heart fa-stack-2x text-primary"></i>
                             <i class="fas fa-laptop fa-stack-1x"></i>
                         </span>
                         <h4 class="my-3">Rapido y Sencillo</h4>
@@ -70,7 +74,7 @@
                     </div>
                     <div class="col-md-4">
                         <span class="fa-stack fa-4x">
-                            <i class="fas fs-circle fa-stack-2x text-primary"></i>
+                            <i class="fas fa-heart fa-stack-2x text-primary"></i>
                             <i class="fas fa-map fa-stack-1x"></i>
                         </span>
                         <h4 class="my-3">Facil Acceso</h4>
@@ -79,7 +83,9 @@
                 </div>
             </div>
         </section>
-
+<br>
+<br>
+<br>
 
         <!-- Footer-->
         <footer class="footer py-4">
