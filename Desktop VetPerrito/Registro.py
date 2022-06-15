@@ -26,8 +26,8 @@ background.place(x = 0, y = 0, relwidth = 1, relheight = 1)
 f = ("Times bold", 14)
 
 imageneliminar = PhotoImage(file = "img/Boton_Eliminar.png")
-imagenseleccionar = PhotoImage(file = "img/Boton_Seleccionar.png")
-imagenguardar = PhotoImage(file = "img/Boton_Guardar.png")
+imagenseleccionar = PhotoImage(file = "img/BotonSeleccionar_GestionReserva.png")
+imagenguardar = PhotoImage(file = "img/BotonGuardar_GestionReserva.png")
 imagenatras = PhotoImage(file = "img/Boton_Atras.png")
 #se definen las variables
 
@@ -291,14 +291,24 @@ class MyDialog:
         self.parent.iconify()
 
 class MyApp:
+
     def __init__(self, parent):
         self.parent = parent
         self.parent.protocol("WM_DELETE_WINDOW", self.on_closing)
 
     def on_closing(self):
-        d = MyDialog(ventana)
-        self.parent.wait_window(d.top)
+        
+        respuesta = messagebox.askyesno("Aviso","¿Desea Salir de la App?")
+        
+        if respuesta == TRUE:
 
+            ventana.destroy()
+       
+
+
+        
+        #d = MyDialog(ventana)
+        #self.parent.wait_window(d.top)
 app = MyApp(ventana)
 
 ventana.mainloop()

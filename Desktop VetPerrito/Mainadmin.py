@@ -299,14 +299,24 @@ class MyDialog:
         self.parent.iconify()
 
 class MyApp:
+
     def __init__(self, parent):
         self.parent = parent
         self.parent.protocol("WM_DELETE_WINDOW", self.on_closing)
 
     def on_closing(self):
-        d = MyDialog(ventana)
-        self.parent.wait_window(d.top)
+        
+        respuesta = messagebox.askyesno("Aviso","¿Desea Salir de la App?")
+        
+        if respuesta == TRUE:
 
+            ventana.destroy()
+       
+
+
+        
+        #d = MyDialog(ventana)
+        #self.parent.wait_window(d.top)
 app = MyApp(ventana)
 
 ventana.mainloop()
