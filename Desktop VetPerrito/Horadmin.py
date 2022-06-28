@@ -1,3 +1,4 @@
+import tkinter as mytk
 from cgitb import text
 from email import message
 from operator import mod
@@ -12,6 +13,7 @@ f = ("Times bold", 14)
 #VENTANA Y SUS PARAMETROS
 ventana= Tk()
 ventana.geometry("1000x600")
+ventana.resizable(width = False, height = False)
 ventana.title("Gestion de Horarios de reserva")
 ventana['bg'] = '#a5aae0'
 
@@ -47,7 +49,6 @@ txtampm.place(x=800,y=110,width=60,height=28)
 txtampm.current(0)
 
 
-
 txthora=Entry(ventana, textvariable=hora)
 txthora.place(x=500,y=110,width=260,height=28)
 
@@ -60,15 +61,15 @@ txthora.place(x=500,y=110,width=260,height=28)
 
 
 #funciones
-#def seleccionar(event):
-     #id= tvagenda.selection()[0]
-     #if int(id)>0:
-     #hora.set(tvagenda.item(id,"values")[1])
+def seleccionar(event):
+    id= tvagenda.selection()[0]
+    if int(id)>0:
+     hora.set(tvagenda.item(id,"values")[1])
 
 def validar():
     return len(hora.get())>0   
 
-tvagenda.bind("<<TreeviewSelect>>")
+tvagenda.bind("<<TreeviewSelect>>",seleccionar)
 
 tvagenda.config(selectmode=BROWSE)
 
@@ -130,4 +131,62 @@ btnNuevo.place(x=495,y=532)
 btnNuevo=Button(ventana,text="VOLVER", command=lambda:nextPage(),image=imagenatras)
 btnNuevo.place(x=35,y=532)
 llenatabla()
+
+#se define la ventana que pregunta si se quiere cerrar
+
+class MyDialog:
+    def __init__(self, parent):
+        self.top = mytk.Toplevel(parent)
+
+        ancho_ventana = 240
+        alto_ventana = 60
+        x_ventana = self.top.winfo_screenwidth() // 2 - ancho_ventana // 2
+        y_ventana = self.top.winfo_screenheight() // 2 - alto_ventana // 2
+        posicion = str(ancho_ventana) + "x" + str(alto_ventana) + "+" + str(x_ventana) + "+" + str(y_ventana)
+        self.top.geometry(posicion)
+        self.top.title("¿Cerrar?")
+
+
+        self.top.overrideredirect(True)
+        self.parent = parent
+        self.top.title("Salir")
+
+        mytk.Label(self.top, text="¿Está seguro?").grid(row=0, column=0, columnspan=2)
+
+        self.button1 = mytk.Button(self.top, text="Si, salir de la app.", command=self.salir)
+        self.button2 = mytk.Button(self.top, text="No, solo minimizar.", command=self.minimizar)
+        self.button1.grid(row=1, column=0, padx=5, pady=5)
+        self.button2.grid(row=1, column=1, padx=5, pady=5)
+
+    def salir(self):
+        self.top.destroy()
+        self.parent.destroy()
+
+    def minimizar(self):
+        self.top.destroy()
+        self.parent.iconify()
+
+class MyApp:
+
+    def __init__(self, parent):
+        self.parent = parent
+        self.parent.protocol("WM_DELETE_WINDOW", self.on_closing)
+
+    def on_closing(self):
+        
+        respuesta = messagebox.askyesno("Aviso","¿Desea Salir de la App?")
+        
+        if respuesta == TRUE:
+
+            ventana.destroy()
+       
+
+
+        
+        #d = MyDialog(ventana)
+        #self.parent.wait_window(d.top)
+
+
+app = MyApp(ventana)
+
 ventana.mainloop()
