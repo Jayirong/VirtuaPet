@@ -52,7 +52,7 @@ LoginBtn = Button(ventana, text ="", command = nextPage, relief="groove" , image
 LoginBtn.place(x=60, y=60)
 
 LoginBtn = Button(ventana, text ="", command = nextPage3, relief="groove" , image=imagengestionf)
-LoginBtn.place(x=530, y=60)
+LoginBtn.place(x=520, y=60)
 
 
 
