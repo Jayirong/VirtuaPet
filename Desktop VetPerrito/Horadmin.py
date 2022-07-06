@@ -45,12 +45,12 @@ tvagenda.heading("id",text="ID",anchor=CENTER)
 tvagenda.heading("horarios",text="Horarios",anchor=CENTER)
 
 txtampm=ttk.Combobox(ventana,values=[" AM"," PM"], textvariable=ampm)
-txtampm.place(x=800,y=110,width=60,height=28)
+txtampm.place(x=730,y=112,width=60,height=28)
 txtampm.current(0)
 
 
 txthora=Entry(ventana, textvariable=hora)
-txthora.place(x=500,y=110,width=260,height=28)
+txthora.place(x=424,y=112,width=260,height=28)
 
 
 
@@ -61,15 +61,15 @@ txthora.place(x=500,y=110,width=260,height=28)
 
 
 #funciones
-def seleccionar(event):
-    id= tvagenda.selection()[0]
-    if int(id)>0:
-     hora.set(tvagenda.item(id,"values")[1])
+#def seleccionar(event):
+ #   id= tvagenda.selection()[0]
+  #  if int(id)>0:
+   #  hora.set(tvagenda.item(id,"values")[1])
 
 def validar():
     return len(hora.get())>0   
 
-tvagenda.bind("<<TreeviewSelect>>",seleccionar)
+tvagenda.bind("<<TreeviewSelect>>")
 
 tvagenda.config(selectmode=BROWSE)
 
@@ -93,13 +93,13 @@ def llenatabla():
         tvagenda.insert("",END,id,text="Horarios", values=fila)       
 
 def nuevo():
-  
+    
     
     if validar():
        
-       val=(hora.get())
-       sql="insert into Horarios (horarios) values (%s)"
-       db.cursor.execute(sql, (val,))
+       val=(hora.get(),ampm.get())
+       sql="insert into Horarios (horarios) values (%s %s)"
+       db.cursor.execute(sql,val)
        db.connection.commit() 
        messagebox.showinfo("Aviso","Se Guardo El Registro Correctamente")
        llenatabla()
